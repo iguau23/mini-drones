@@ -103,8 +103,8 @@ def espiral(mc):
         t += reflesh_rate
         time.sleep(reflesh_rate)
         theta = angular_velocity*t
-        if(theta > math.pi*2):
-            theta -= math.pi*2
+    voltas_completas = (math.pi*2)*(theta//(math.pi*2))
+    theta -= voltas_completas
     mc.stop()
 
     #termina a ultima rotaçao
@@ -114,5 +114,5 @@ def espiral(mc):
         mc.start_linear_motion(0.0, velocity_y, velocity_z)
         t += reflesh_rate
         time.sleep(reflesh_rate)
-        theta = angular_velocity*t
+        theta = angular_velocity*t - voltas_completas
     mc.stop()

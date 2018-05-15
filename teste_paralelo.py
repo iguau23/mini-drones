@@ -11,7 +11,7 @@ from cflib.positioning.motion_commander import MotionCommander
 from cflib.crazyflie.swarm import CachedCfFactory
 from cflib.crazyflie.swarm import Swarm
 
-URI1 = 'radio://0/80/250K/E7E7E7E7E7'
+URI1 = 'radio://0/80/250K/E7E7E7E7E9'
 URI2 = 'radio://0/80/250K/E7E7E7E7EA'
 
 cflib.crtp.init_drivers(enable_debug_driver=False)
