@@ -19,13 +19,12 @@ factory = CachedCfFactory(rw_cache='./cache')
 
 
 
-position   = [1]
+dronePosition   = [1, 3, 5]
 cornersList = [1,3,5,7]
 validCommmand = True
 user_input_numbers = 'start'
 user_input_command = 'start'
-messageComando =("Escolha um comando:\n"
-                 "(1) - arco\n"
+messageComando =("(1) - arco\n"
                  "(2) - degrau\n"
                  "(3) - linear\n"
                  "(4) - ziguezague\n"
@@ -42,12 +41,18 @@ while(user_input_command != 's'):
     user_input_numbers = input(message)
 
     selected = []
-    if(user_input.find('1')!=-1):
+    if(user_input_numbers.find('1')!=-1):
         selected.append(1)
-    if(user_input.find('2')!=-1):
+    if(user_input_numbers.find('2')!=-1):
         selected.append(2)
-    if(user_input.find('3')!=-1):
+    if(user_input_numbers.find('3')!=-1):
         selected.append(3)
+    if(len(selected)==0):
+        print("\n===============================================================================\n"
+              "     Obrigado por terem utilizado o nosso mini-drones program!\n"
+              "                      Espero que tenham gostado!\n"
+              "===============================================================================\n")
+        break
 
     scf = []
     mcs = []
@@ -59,31 +64,32 @@ while(user_input_command != 's'):
         scf.append(sync)
 
     selectedCommands = []
-    for j in selected:
-        print("\npara o drone %d" %j)
+    for i in selected:
+        print("\nEscolha um comando para o drone %d, que está na posição %d" %(i, dronePosition[i-1]))
         selectedCommands.append(input(messageComando))
-        position[j-1] = pc.newPosition(position[j-1])
+        dronePosition[i-1] = pc.newPosition(dronePosition[i-1])
 
-
+    print("executando")
     pr = paralelo.Paralelo(mcs)
 
     for mc in mcs:
         pr.putCommand(paralelo.TAKEOFF, mc)
-    pr.execute()
+    #pr.execute()
 
-    for k in selected:
-        pr.putCommand(selectedCommands[k-1], mcs[k-1])
-    pr.execute()
+    for i in range(len(selected)):
+        pr.putCommand(selectedCommands[i-1], mcs[i-1])
+    #pr.execute()
 
-    for m in selected:
-        if(position[m-1] in cornersList):
-            pr.putCommand(paralelo.TURNRIGHT, mcs[l-1])
-        pr.execute()
+    for i in range(len(selected)):
+        if(dronePosition[i-1] in cornersList):
+            pr.putCommand(paralelo.TURNRIGHT, mcs[i-1])
+        #pr.execute()
 
 
-    for l in selected:
-        pr.putCommand(paralelo.LAND, mcs[l-1])
-    pr.execute()
+    for i in range(len(selected)):
+        pr.putCommand(paralelo.LAND, mcs[i-1])
+    #pr.execute()
+    print("pronto\n")
 
     for sync in scf:
         sync.close_link()
