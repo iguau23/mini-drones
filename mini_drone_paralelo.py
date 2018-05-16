@@ -61,8 +61,6 @@ if(user_input.find('2')!=-1):
 if(user_input.find('3')!=-1):
     selected.append(3)
 
-
-
 scf = []
 mcs = []
 for i in selected:
