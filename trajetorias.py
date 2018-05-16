@@ -3,17 +3,20 @@ import time
 import math
 from cflib.positioning.motion_commander import MotionCommander
 
+def turnRight(mc):
+    time.sleep(1)
+    mc.turn_right(90)
+    time.sleep(1)
+    
 def linear(mc):
     time.sleep(1)
     mc.forward(1.25, velocity=0.7)
-    mc.turn_right(90)
     time.sleep(1)
 
 def arco(mc):
     time.sleep(1)
     mc.turn_right(90)
     mc.circle_left(0.63, velocity=0.5, angle_degrees=180)
-    mc.turn_right(180)
     time.sleep(1)
 
 def zigueZague(mc):
@@ -22,8 +25,7 @@ def zigueZague(mc):
     time.sleep(1)
     mc.move_distance(0.55, -0.5, 0, velocity=0.4)
     time.sleep(1)
-    mc.move_distance(0.35, 0.25, 0, velocity=0.4)
-    mc.turn_right(90)
+    mc.move_distance(0.35, 0.25, 0, velocity=0.4
     time.sleep(1)
 
 def degrau(mc):
@@ -37,7 +39,6 @@ def degrau(mc):
     mc.forward(0.3, velocity=0.5)
     mc.up(0.2)
     mc.forward(0.35, velocity=0.5)
-    mc.turn_right(90)
     time.sleep(1)
 
 def loop(mc):
@@ -63,7 +64,6 @@ def loop(mc):
     #fim do loop
     time.sleep(1)
     mc.forward(0.5, velocity=0.5)
-    mc.turn_right(90)
 
 def espiral(mc):
     #parametros

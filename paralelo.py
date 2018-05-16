@@ -10,21 +10,20 @@ from cflib.positioning.motion_commander import MotionCommander
 from cflib.crazyflie.swarm import CachedCfFactory
 from cflib.crazyflie.swarm import Swarm
 
+
 ARCO        = '1'
 DEGRAU      = '2'
-HORARIO     = '3'
-LINEAR      = '4'
-ZIGUEZAGUE  = '5'
-DIAGONAL    = '6'
-LOOP        = '7'
-ESPIRAL     = '8'
+LINEAR      = '3'
+ZIGUEZAGUE  = '4'
+LOOP        = '5'
+ESPIRAL     = '6'
 QUIT        = 's'
 TAKEOFF     = 'takeoff'
 UP          = 'up'
 DOWN        = 'down'
 LAND        = 'land'
 command     = 'start'
-commandsList = [ARCO, DEGRAU, HORARIO, LINEAR, ZIGUEZAGUE, DIAGONAL,
+commandsList = [ARCO, DEGRAU, LINEAR, ZIGUEZAGUE,
                 LOOP, ESPIRAL, TAKEOFF, LAND, UP, DOWN]
 validCommmand = True
 

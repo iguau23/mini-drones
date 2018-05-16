@@ -4,6 +4,7 @@ import cflib.crtp
 import trajetorias as tr
 import threading
 import paralelo
+import PositionControl as pc
 
 from cflib.crazyflie import Crazyflie
 from cflib.crazyflie.syncCrazyflie import SyncCrazyflie
@@ -12,32 +13,16 @@ from cflib.crazyflie.swarm import CachedCfFactory
 from cflib.crazyflie.swarm import Swarm
 from builtins import input
 
-#RogerioNakamashi
-ARCO        = '1'
-DEGRAU      = '2'
-HORARIO     = '3'
-LINEAR      = '4'
-ZIGUEZAGUE  = '5'
-DIAGONAL    = '6'
-LOOP        = '7'
-ESPIRAL     = '8'
-QUIT        = 's'
-TAKEOFF     = 'takeoff'
-UP          = 'up'
-DOWN        = 'down'
-LAND        = 'land'
-command     = 'start'
-commandsList = [ARCO, DEGRAU, HORARIO, LINEAR, ZIGUEZAGUE, DIAGONAL,
-                LOOP, ESPIRAL, TAKEOFF, LAND, UP, DOWN]
+position   = [1]
+cornersList = [1,3,5,7]
+
 validCommmand = True
 
 messageComando =("Escolha um comando:\n"
                  "(1) - arco\n"
                  "(2) - degrau\n"
-                 "(3) - horario\n"
                  "(4) - linear\n"
                  "(5) - ziguezague\n"
-                 "(6) - diagonal\n"
                  "(7) - loop\n"
                  "(8) - espiral\n"
                  "(s) - sair\n")
@@ -46,7 +31,6 @@ URI1 = 'radio://0/80/250K/E7E7E7E7E7'
 URI2 = 'radio://0/80/250K/E7E7E7E7EA'
 URI3 = 'radio://0/80/250K/E7E7E7E7E9'
 uris = [URI1, URI2, URI3]
-
 
 cflib.crtp.init_drivers(enable_debug_driver=False)
 factory = CachedCfFactory(rw_cache='./cache')
@@ -64,6 +48,7 @@ if(user_input.find('3')!=-1):
 
 scf = []
 mcs = []
+
 for i in selected:
     sync = SyncCrazyflie(uris[i-1], cf=Crazyflie(rw_cache='./cache'))
     sync.open_link()
@@ -74,6 +59,8 @@ selectedCommands = []
 for j in selected:
     print("\npara o drone %d" %j)
     selectedCommands.append(input(messageComando))
+    position[j-1] = pc.newPosition(position[j-1])
+
 
 pr = paralelo.Paralelo(mcs)
 
@@ -83,11 +70,12 @@ pr.execute()
 
 for k in selected:
     pr.putCommand(selectedCommands[k-1], mcs[k-1])
-
 pr.execute()
 
 for l in selected:
     pr.putCommand(paralelo.LAND, mcs[l-1])
+    if(position in cornerList):
+        pr.putCommand(paralelo.turnRight, mcs[l-1])
 pr.execute()
 
 for sync in scf:
