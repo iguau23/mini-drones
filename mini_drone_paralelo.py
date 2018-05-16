@@ -12,6 +12,7 @@ from cflib.crazyflie.swarm import CachedCfFactory
 from cflib.crazyflie.swarm import Swarm
 from builtins import input
 
+#RogerioNakamashi
 ARCO        = '1'
 DEGRAU      = '2'
 HORARIO     = '3'
