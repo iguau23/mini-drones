@@ -83,22 +83,8 @@ for mc in mcs:
 pr.execute()
 
 for k in selected:
-    if(selectedCommands[k-1] == ARCO):
-        pr.putCommand(paralelo.ARCO, mcs[k-1])
-    elif(selectedCommands[k-1] == DEGRAU):
-        pr.putCommand(paralelo.DEGRAU, mcs[k-1])
-    elif(selectedCommands[k-1] == LINEAR):
-        pr.putCommand(paralelo.LINEAR, mcs[k-1])
-    elif(selectedCommands[k-1] == HORARIO):
-        pr.putCommand(paralelo.HORARIO, mcs[k-1])
-    elif(selectedCommands[k-1] == DIAGONAL):
-        pr.putCommand(paralelo.DIAGONAL, mcs[k-1])
-    elif(selectedCommands[k-1] == ZIGUEZAGUE):
-        pr.putCommand(paralelo.ZIGUEZAGUE, mcs[k-1])
-    elif(selectedCommands[k-1] == ESPIRAL):
-        pr.putCommand(paralelo.ESPIRAL, mcs[k-1])
-    elif(selectedCommands[k-1] == LOOP):
-        pr.putCommand(paralelo.LOOP, mcs[k-1])
+    pr.putCommand(selectedCommands[k-1], mcs[k-1])
+
 pr.execute()
 
 for l in selected:
