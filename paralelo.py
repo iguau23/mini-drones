@@ -19,12 +19,13 @@ LOOP        = '5'
 ESPIRAL     = '6'
 QUIT        = 's'
 TAKEOFF     = 'takeoff'
+TURNRIGHT   = 'turnright'
 UP          = 'up'
 DOWN        = 'down'
 LAND        = 'land'
 command     = 'start'
 commandsList = [ARCO, DEGRAU, LINEAR, ZIGUEZAGUE,
-                LOOP, ESPIRAL, TAKEOFF, LAND, UP, DOWN]
+                LOOP, ESPIRAL, TAKEOFF, LAND, UP, DOWN, TURNRIGHT]
 validCommmand = True
 
 class Paralelo:
@@ -51,14 +52,6 @@ class Paralelo:
             thread = threading.Thread(target=tr.linear, args=(mc, ))
             thread.setDaemon(True)
             self.threads[len(self.threads)]=thread
-        elif(commandCode == HORARIO):
-            thread = threading.Thread(target=tr.horario_abc, args=(mc, ))
-            thread.setDaemon(True)
-            self.threads[len(self.threads)]=thread
-        elif(commandCode == DIAGONAL):
-            thread = threading.Thread(target=tr.diagonal, args=(mc, ))
-            thread.setDaemon(True)
-            self.threads[len(self.threads)]=thread
         elif(commandCode == ZIGUEZAGUE):
             thread = threading.Thread(target=tr.zigueZague, args=(mc, ))
             thread.setDaemon(True)
@@ -81,6 +74,10 @@ class Paralelo:
             self.threads[len(self.threads)]=thread
         elif(commandCode == DOWN):
             thread = threading.Thread(target=MotionCommander.land, args=(mc, 0.2))
+            thread.setDaemon(True)
+            self.threads[len(self.threads)]=thread
+        elif(commandCode == TURNRIGHT):
+            thread = threading.Thread(target=tr.turnRight, args=(mc, ))
             thread.setDaemon(True)
             self.threads[len(self.threads)]=thread
 

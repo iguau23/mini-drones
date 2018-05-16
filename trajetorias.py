@@ -7,7 +7,7 @@ def turnRight(mc):
     time.sleep(1)
     mc.turn_right(90)
     time.sleep(1)
-    
+
 def linear(mc):
     time.sleep(1)
     mc.forward(1.25, velocity=0.7)
@@ -25,7 +25,7 @@ def zigueZague(mc):
     time.sleep(1)
     mc.move_distance(0.55, -0.5, 0, velocity=0.4)
     time.sleep(1)
-    mc.move_distance(0.35, 0.25, 0, velocity=0.4
+    mc.move_distance(0.35, 0.25, 0, velocity=0.4)
     time.sleep(1)
 
 def degrau(mc):
@@ -90,7 +90,7 @@ def espiral(mc):
     theta -= voltas_completas
     mc.stop()
 
-    #termina a ultima rotaçao
+    #termina a ultima rotacao
     while (theta<math.pi*2):
         velocity_y = -angular_velocity*radius_m*math.sin(theta + start_angle)
         velocity_z = angular_velocity*radius_m*math.cos(theta + start_angle)
