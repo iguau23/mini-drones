@@ -20,7 +20,7 @@ factory = CachedCfFactory(rw_cache='./cache')
 
 
 dronePosition   = [1, 3, 5]
-cornersList = [1,3,5,7]
+turnList = [1,3,5,7]
 validCommmand = True
 user_input_numbers = 'start'
 user_input_command = 'start'
@@ -32,9 +32,9 @@ messageComando =("(1) - arco\n"
                  "(6) - espiral\n"
                  "(s) - sair\n")
 message = 'Quais drones deseja controlar? (1, 2, 3 ou combinacao delas): '
-URI1 = 'radio://0/80/250K/E7E7E7E7E7'
-URI2 = 'radio://0/80/250K/E7E7E7E7EA'
-URI3 = 'radio://0/80/250K/E7E7E7E7E9'
+URI1 = 'radio://0/80/250K/E7E7E7E7E1'
+URI2 = 'radio://0/80/250K/E7E7E7E7E2'
+URI3 = 'radio://0/80/250K/E7E7E7E7E3'
 uris = [URI1, URI2, URI3]
 while(user_input_command != 's'):
 
@@ -74,21 +74,21 @@ while(user_input_command != 's'):
 
     for mc in mcs:
         pr.putCommand(paralelo.TAKEOFF, mc)
-    #pr.execute()
+    pr.execute()
 
     for i in range(len(selected)):
-        pr.putCommand(selectedCommands[i-1], mcs[i-1])
-    #pr.execute()
+        pr.putCommand(selectedCommands[i], mcs[i])
+    pr.execute()
 
     for i in range(len(selected)):
-        if(dronePosition[i-1] in cornersList):
-            pr.putCommand(paralelo.TURNRIGHT, mcs[i-1])
-        #pr.execute()
+        if(dronePosition[selected[i]-1] in turnList):
+            pr.putCommand(paralelo.TURNRIGHT, mcs[i])
+    pr.execute()
 
 
     for i in range(len(selected)):
         pr.putCommand(paralelo.LAND, mcs[i-1])
-    #pr.execute()
+    pr.execute()
     print("pronto\n")
 
     for sync in scf:
