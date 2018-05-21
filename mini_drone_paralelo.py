@@ -30,6 +30,7 @@ messageComando =("(1) - arco\n"
                  "(4) - ziguezague\n"
                  "(5) - loop\n"
                  "(6) - espiral\n"
+                 "(7) - circulo\n"
                  "(s) - sair\n")
 message = 'Quais drones deseja controlar? (1, 2, 3 ou combinacao delas): '
 URI1 = 'radio://0/80/250K/E7E7E7E7E1'
@@ -74,21 +75,21 @@ while(user_input_command != 's'):
 
     for mc in mcs:
         pr.putCommand(paralelo.TAKEOFF, mc)
-    #pr.execute()
+    pr.execute()
 
     for i in range(len(selected)):
         pr.putCommand(selectedCommands[i], mcs[i])
-    #pr.execute()
+    pr.execute()
 
     for i in range(len(selected)):
         if(dronePosition[selected[i]-1] in turnList):
             pr.putCommand(paralelo.TURNRIGHT, mcs[i])
-    #pr.execute()
+    pr.execute()
 
 
     for i in range(len(selected)):
         pr.putCommand(paralelo.LAND, mcs[i-1])
-    #pr.execute()
+    pr.execute()
     print("pronto\n")
 
     for sync in scf:

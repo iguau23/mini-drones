@@ -18,6 +18,7 @@ LINEAR      = '3'
 ZIGUEZAGUE  = '4'
 LOOP        = '5'
 ESPIRAL     = '6'
+CIRCULO     = '7'
 QUIT        = 's'
 TAKEOFF     = 'takeoff'
 TURNRIGHT   = 'turnright'
@@ -27,7 +28,7 @@ DOWN        = 'down'
 LAND        = 'land'
 command     = 'start'
 commandsList = [ARCO, DEGRAU, LINEAR, ZIGUEZAGUE,
-                LOOP, ESPIRAL, TAKEOFF, LAND, UP, DOWN, TURNRIGHT]
+                LOOP, ESPIRAL, CIRCULO, TAKEOFF, LAND, UP, DOWN, TURNRIGHT]
 validCommmand = True
 
 class Paralelo:
@@ -64,6 +65,10 @@ class Paralelo:
             self.threads[len(self.threads)]=thread
         elif(commandCode == ESPIRAL):
             thread = threading.Thread(target=tr.espiral, args=(mc, ))
+            thread.setDaemon(True)
+            self.threads[len(self.threads)]=thread
+        elif(commandCode == CIRCULO):
+            thread = threading.Thread(target=tr.circulo, args=(mc, ))
             thread.setDaemon(True)
             self.threads[len(self.threads)]=thread
         elif(commandCode == LAND):
