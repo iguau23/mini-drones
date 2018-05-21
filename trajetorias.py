@@ -27,9 +27,18 @@ def arco(mc):
 
 def circulo(mc):
     time.sleep(1)
+    mc.forward(1.5*DIST, velocity=0.5)
     mc.circle_left(1.5*DIST, velocity=0.5, angle_degrees=180)
-    mc.circle_left(1.0*DIST, velocity=0.5, angle_degrees=180)
-    mc.circle_left(0.5*DIST, velocity=0.5, angle_degrees=180)
+    mc.circle_left(1.2*DIST, velocity=0.5, angle_degrees=180)
+    mc.circle_left(0.8*DIST, velocity=0.5, angle_degrees=180)
+    time.sleep(1)
+    mc.turn_left(180)
+    time.sleep(1)
+    mc.circle_right(0.5*DIST, velocity=0.5, angle_degrees=180)
+    mc.circle_right(1.0*DIST, velocity=0.5, angle_degrees=180)
+    mc.circle_right(1.5*DIST, velocity=0.5, angle_degrees=180)
+    time.sleep(1)
+    mc.turn_left(180)
     time.sleep(1)
 
 def zigueZague(mc):
