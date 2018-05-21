@@ -5,19 +5,35 @@ from cflib.positioning.motion_commander import MotionCommander
 
 DIST = 0.8
 def turnRight(mc):
+    if(mc.getStopMotion()):
+        if(mc._is_flying):
+            mc.land()
+        return
     mc.turn_left(90)
     time.sleep(1)
 
 def turnLeft(mc):
+    if(mc.getStopMotion()):
+        if(mc._is_flying):
+            mc.land()
+        return
     mc.turn_left(90)
     time.sleep(1)
 
 def linear(mc):
+    if(mc.getStopMotion()):
+        if(mc._is_flying):
+            mc.land()
+        return
     time.sleep(1)
     mc.forward(1.5*DIST, velocity=0.5)
     time.sleep(1)
 
 def arco(mc):
+    if(mc.getStopMotion()):
+        if(mc._is_flying):
+            mc.land()
+        return
     time.sleep(1)
     mc.turn_left(90)
     mc.circle_right(0.75*DIST, velocity=0.6, angle_degrees=180)
@@ -26,6 +42,10 @@ def arco(mc):
     time.sleep(1)
 
 def circulo(mc):
+    if(mc.getStopMotion()):
+        if(mc._is_flying):
+            mc.land()
+        return
     time.sleep(1)
     mc.circle_left(1.5*DIST, velocity=0.5, angle_degrees=180)
     mc.circle_left(1.0*DIST, velocity=0.5, angle_degrees=180)
@@ -33,6 +53,10 @@ def circulo(mc):
     time.sleep(1)
 
 def zigueZague(mc):
+    if(mc.getStopMotion()):
+        if(mc._is_flying):
+            mc.land()
+        return
     time.sleep(1)
     mc.move_distance(0.4*DIST, 0.25, 0, velocity=0.4)
     time.sleep(1)
@@ -44,6 +68,10 @@ def zigueZague(mc):
     time.sleep(1)
 
 def degrau(mc):
+    if(mc.getStopMotion()):
+        if(mc._is_flying):
+            mc.land()
+        return
     time.sleep(1)
     mc.forward(0.4*DIST, velocity=0.5)
     mc.up(0.2)
@@ -57,10 +85,18 @@ def degrau(mc):
     time.sleep(1)
 
 def loop(mc):
+    if(mc.getStopMotion()):
+        if(mc._is_flying):
+            mc.land()
+        return
     time.sleep(1)
     mc.forward(0.8*DIST, velocity=0.5)
     time.sleep(1)
     #loop
+    if(mc.getStopMotion()):
+        if(mc._is_flying):
+            mc.land()
+        return
     velocity = 0.2
     radius_m = 0.2
     angular_velocity = velocity/radius_m
@@ -94,6 +130,10 @@ def espiral(mc):
     start_angle = -math.pi/2
 
     #inicio da espiral
+    if(mc.getStopMotion()):
+        if(mc._is_flying):
+            mc.land()
+        return
     while (t < flight_time):
         velocity_y = -angular_velocity*radius_m*math.sin(theta + start_angle)
         velocity_z = angular_velocity*radius_m*math.cos(theta + start_angle)

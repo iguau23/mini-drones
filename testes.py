@@ -27,11 +27,28 @@ class Teste():
         URI3 = 'radio://0/80/250K/E7E7E7E7E3'
         self.uris = [URI1, URI2, URI3]
 
-    def pouso_emergencial(self, mc):
-        entrada = input("1 para cancelar: ")
-        if(entrada == '1'):
-            mc.setStopMotion(True)
+    def pouso_emergencial(self):
 
+        stop = False
+        while(stop==False):
+            stop = True
+            for mc in self.mcs:
+                if(mc.getStopMotion()==False):
+                    stop = False
+            entrada = input("pouso emergencial - Drone (1), (2) ou (3): ")
+            if(entrada == ""):
+                break
+            entrada = int(entrada)
+            n = self.selected.index(entrada)
+            if(n!=-1):
+                self.mcs[n].setStopMotion(True)
+                print("pouso emergencial %d acionado" %entrada)
+
+    def setThreadEmergencial(self):
+        #inicia a thread para o pouso emergencial
+        threadEmergencial = threading.Thread(target=self.pouso_emergencial)
+        threadEmergencial.setDaemon(True)
+        threadEmergencial.start()
 
     def setVerificaBateria(self):
         time.sleep(0.5)
@@ -110,8 +127,10 @@ class Teste():
 
         self.selectDrone()
 
+
         selectedTest = 'start'
         while(selectedTest != 's'):
+            self.isAlive = True
             messageTest = ("\nQual teste você deseja fazer?\n"
                           "(1) Combinacao1\n"
                           "(2) Combinacao2\n"
@@ -122,15 +141,16 @@ class Teste():
                           "(s) sair\n")
             selectedTest = input(messageTest)
 
-            threadEmergencial = threading.Thread(target=self.pouso_emergencial, args=(self.mcs[0], ))
-            threadEmergencial.setDaemon(True)
-            threadEmergencial.start()
+
 
             if (selectedTest == COMB1):
+                self.setThreadEmergencial()
                 combinacao.combinacao1(self.mcs[0])
             elif(selectedTest == COMB2):
+                self.setThreadEmergencial()
                 combinacao.combinacao2(self.mcs[0], self.mcs[1])
             elif(selectedTest == COMB3):
+                self.setThreadEmergencial()
                 combinacao.combinacao3(self.mcs[0], self.mcs[1], self.mcs[2])
             elif(selectedTest == TESTBATTERY):
                 if(len(self.selected)>1):
@@ -155,6 +175,7 @@ class Teste():
             #zera o pouso emergencial
             for mc in self.mcs:
                 mc.setStopMotion(False)
+            self.isAlive = False
 
         for sync in self.scfs:
             sync.close_link()
