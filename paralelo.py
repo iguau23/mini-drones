@@ -3,6 +3,7 @@ import time
 import cflib.crtp
 import trajetorias as tr
 import threading
+import multiprocessing as mp
 
 from cflib.crazyflie import Crazyflie
 from cflib.crazyflie.syncCrazyflie import SyncCrazyflie

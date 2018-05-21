@@ -74,21 +74,21 @@ while(user_input_command != 's'):
 
     for mc in mcs:
         pr.putCommand(paralelo.TAKEOFF, mc)
-    pr.execute()
+    #pr.execute()
 
     for i in range(len(selected)):
         pr.putCommand(selectedCommands[i], mcs[i])
-    pr.execute()
+    #pr.execute()
 
     for i in range(len(selected)):
         if(dronePosition[selected[i]-1] in turnList):
             pr.putCommand(paralelo.TURNRIGHT, mcs[i])
-    pr.execute()
+    #pr.execute()
 
 
     for i in range(len(selected)):
         pr.putCommand(paralelo.LAND, mcs[i-1])
-    pr.execute()
+    #pr.execute()
     print("pronto\n")
 
     for sync in scf:
