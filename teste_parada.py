@@ -13,7 +13,7 @@ from cflib.crazyflie.swarm import CachedCfFactory
 from cflib.crazyflie.swarm import Swarm
 from cflib.crazyflie.log import LogConfig
 
-URI1 = 'radio://0/80/250K/E7E7E7E7E1'
+URI1 = 'radio://0/80/250K/E7E7E7E7E2'
 
 cflib.crtp.init_drivers(enable_debug_driver=False)
 factory = CachedCfFactory(rw_cache='./cache')
@@ -39,7 +39,6 @@ pr.execute()
 pr.putCommand(paralelo.LINEAR, mc1)
 pr.execute()
 
-mc1.setStopMotion(True)
 
 pr.putCommand(paralelo.LINEAR, mc1)
 pr.execute()

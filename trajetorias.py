@@ -92,7 +92,7 @@ def espiral(mc):
         velocity_z = angular_velocity*radius_m*math.cos(theta + start_angle)
         mc.start_linear_motion(velocity, velocity_y, velocity_z)
         t += reflesh_rate
-        time.sleep(reflesh_rate)
+        mc.safeSleep(reflesh_rate)
         theta = angular_velocity*t
     voltas_completas = (math.pi*2)*(theta//(math.pi*2))
     theta -= voltas_completas

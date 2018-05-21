@@ -27,6 +27,12 @@ class Teste():
         URI3 = 'radio://0/80/250K/E7E7E7E7E3'
         self.uris = [URI1, URI2, URI3]
 
+    def pouso_emergencial(self, mc):
+        entrada = input("1 para cancelar: ")
+        if(entrada == '1'):
+            mc.setStopMotion(True)
+
+
     def setVerificaBateria(self):
         time.sleep(0.5)
         self.lg_battery = LogConfig(name='Battery', period_in_ms=100)
@@ -116,6 +122,9 @@ class Teste():
                           "(s) sair\n")
             selectedTest = input(messageTest)
 
+            threadEmergencial = threading.Thread(target=self.pouso_emergencial, args=(self.mcs[0], ))
+            threadEmergencial.setDaemon(True)
+            threadEmergencial.start()
 
             if (selectedTest == COMB1):
                 combinacao.combinacao1(self.mcs[0])
@@ -141,9 +150,11 @@ class Teste():
             elif(selectedTest == SELECT):
                 for sync in self.scfs:
                     sync.close_link()
-
                 self.selectDrone()
 
+            #zera o pouso emergencial
+            for mc in self.mcs:
+                mc.setStopMotion(False)
 
         for sync in self.scfs:
             sync.close_link()
