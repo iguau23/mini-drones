@@ -20,6 +20,7 @@ ESPIRAL     = '6'
 QUIT        = 's'
 TAKEOFF     = 'takeoff'
 TURNRIGHT   = 'turnright'
+TURNLEFT    = 'turnleft'
 UP          = 'up'
 DOWN        = 'down'
 LAND        = 'land'
@@ -78,6 +79,10 @@ class Paralelo:
             self.threads[len(self.threads)]=thread
         elif(commandCode == TURNRIGHT):
             thread = threading.Thread(target=tr.turnRight, args=(mc, ))
+            thread.setDaemon(True)
+            self.threads[len(self.threads)]=thread
+        elif(commandCode == TURNLEFT):
+            thread = threading.Thread(target=tr.turnLeft, args=(mc, ))
             thread.setDaemon(True)
             self.threads[len(self.threads)]=thread
 
