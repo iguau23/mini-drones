@@ -55,11 +55,11 @@ def combinacao2(mc1, mc2):
     pr.putCommand(paralelo.TAKEOFF, mc2)
     pr.execute()
 
-    pr.putCommand(paralelo.LINEAR, mc1)
+    pr.putCommand(paralelo.ZIGUEZAGUE, mc1)
     pr.putCommand(paralelo.ZIGUEZAGUE, mc2)
     pr.execute()
 
-    pr.putCommand(paralelo.ZIGUEZAGUE, mc1)
+    pr.putCommand(paralelo.LINEAR, mc1)
     pr.putCommand(paralelo.LINEAR, mc2)
     pr.execute()
 
@@ -67,11 +67,11 @@ def combinacao2(mc1, mc2):
     pr.putCommand(paralelo.TURNRIGHT, mc2)
     pr.execute()
 
-    pr.putCommand(paralelo.ARCO, mc1)
+    pr.putCommand(paralelo.LOOP, mc1)
     pr.putCommand(paralelo.LOOP, mc2)
     pr.execute()
 
-    pr.putCommand(paralelo.LOOP, mc1)
+    pr.putCommand(paralelo.ARCO, mc1)
     pr.putCommand(paralelo.ARCO, mc2)
     pr.execute()
 
@@ -79,12 +79,12 @@ def combinacao2(mc1, mc2):
     pr.putCommand(paralelo.TURNRIGHT, mc2)
     pr.execute()
 
-    pr.putCommand(paralelo.ESPIRAL, mc1)
+    pr.putCommand(paralelo.LINEAR, mc1)
     pr.putCommand(paralelo.LINEAR, mc2)
     pr.execute()
 
-    pr.putCommand(paralelo.LINEAR, mc1)
     pr.putCommand(paralelo.ESPIRAL, mc1)
+    pr.putCommand(paralelo.ESPIRAL, mc2)
     pr.execute()
 
     pr.putCommand(paralelo.TURNRIGHT, mc1)
@@ -93,6 +93,65 @@ def combinacao2(mc1, mc2):
 
     pr.putCommand(paralelo.LAND, mc1)
     pr.putCommand(paralelo.LAND, mc2)
+    pr.execute()
+
+def combinacao3(mc1, mc2, mc3):
+    mcs={mc1, mc2, mc3}
+    pr = paralelo.Paralelo(mcs)
+
+    pr.putCommand(paralelo.TAKEOFF, mc1)
+    pr.putCommand(paralelo.TAKEOFF, mc2)
+    pr.putCommand(paralelo.TAKEOFF, mc3)
+    pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc1)
+    pr.putCommand(paralelo.LINEAR, mc2)
+    pr.putCommand(paralelo.LINEAR, mc3)
+    pr.execute()
+
+    pr.putCommand(paralelo.ZIGUEZAGUE, mc1)
+    pr.putCommand(paralelo.ZIGUEZAGUE, mc2)
+    pr.putCommand(paralelo.ZIGUEZAGUE, mc3)
+    pr.execute()
+
+    pr.putCommand(paralelo.TURNRIGHT, mc1)
+    pr.putCommand(paralelo.TURNRIGHT, mc2)
+    pr.putCommand(paralelo.TURNRIGHT, mc3)
+    pr.execute()
+
+    pr.putCommand(paralelo.ARCO, mc1)
+    pr.putCommand(paralelo.ARCO, mc2)
+    pr.putCommand(paralelo.ARCO, mc3)
+    pr.execute()
+
+    pr.putCommand(paralelo.LOOP, mc1)
+    pr.putCommand(paralelo.LOOP, mc2)
+    pr.putCommand(paralelo.LOOP, mc3)
+    pr.execute()
+
+    pr.putCommand(paralelo.TURNRIGHT, mc1)
+    pr.putCommand(paralelo.TURNRIGHT, mc2)
+    pr.putCommand(paralelo.TURNRIGHT, mc3)
+    pr.execute()
+
+    pr.putCommand(paralelo.ESPIRAL, mc1)
+    pr.putCommand(paralelo.ESPIRAL, mc2)
+    pr.putCommand(paralelo.ESPIRAL, mc3)
+    pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc1)
+    pr.putCommand(paralelo.LINEAR, mc2)
+    pr.putCommand(paralelo.LINEAR, mc3)
+    pr.execute()
+
+    pr.putCommand(paralelo.TURNRIGHT, mc1)
+    pr.putCommand(paralelo.TURNRIGHT, mc2)
+    pr.putCommand(paralelo.TURNRIGHT, mc3)
+    pr.execute()
+
+    pr.putCommand(paralelo.LAND, mc1)
+    pr.putCommand(paralelo.LAND, mc2)
+    pr.putCommand(paralelo.LAND, mc3)
     pr.execute()
 
 def combinacaoArcos(mc):

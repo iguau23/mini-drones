@@ -20,8 +20,8 @@ def linear(mc):
 def arco(mc):
     time.sleep(1)
     mc.turn_left(90)
-    mc.circle_right(0.75*DIST, velocity=0.5, angle_degrees=180)
-    mc.forward(0.2*DIST, velocity=0.5)
+    mc.circle_right(0.75*DIST, velocity=0.6, angle_degrees=180)
+    mc.forward(0.25*DIST, velocity=0.6)
     mc.turn_left(90)
     time.sleep(1)
 
@@ -36,9 +36,11 @@ def zigueZague(mc):
     time.sleep(1)
     mc.move_distance(0.4*DIST, 0.25, 0, velocity=0.4)
     time.sleep(1)
-    mc.move_distance(0.7*DIST, -0.5, 0, velocity=0.4)
+    mc.move_distance(0.4*DIST, -0.25, 0, velocity=0.4)
     time.sleep(1)
     mc.move_distance(0.4*DIST, 0.25, 0, velocity=0.4)
+    time.sleep(1)
+    mc.move_distance(0.4*DIST, -0.25, 0, velocity=0.4)
     time.sleep(1)
 
 def degrau(mc):

@@ -7,7 +7,7 @@ from cflib.crazyflie import Crazyflie
 from cflib.crazyflie.log import LogConfig
 
 
-URI1 = 'radio://0/80/250K/E7E7E7E7E3'
+URI1 = 'radio://0/80/250K/E7E7E7E7E2'
 
 
 logging.basicConfig(level=logging.ERROR)
@@ -53,13 +53,13 @@ if __name__ == '__main__':
     lg_stab = LogConfig(name='Battery', period_in_ms=100)
     lg_stab.add_variable('pm.vbat', 'float')
 
-    #try:
-    cf.log.add_config(lg_stab)
-    # This callback will receive the data
-    lg_stab.data_received_cb.add_callback(stab_log_data)
-    # Start the logging
-    lg_stab.start()
-    #except AttributeError:
-        #print('Could not add Stabilizer log config, bad configuration.')
-    time.sleep(5)
+    try:
+        cf.log.add_config(lg_stab)
+        #This callback will receive the data
+        lg_stab.data_received_cb.add_callback(stab_log_data)
+        # Start the logging
+        lg_stab.start()
+    except AttributeError:
+        print('Could not add Stabilizer log config, bad configuration.')
+    time.sleep(2)
     cf.close_link()

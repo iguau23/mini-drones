@@ -11,7 +11,7 @@ from cflib.positioning.motion_commander import MotionCommander
 from cflib.crazyflie.swarm import CachedCfFactory
 from cflib.crazyflie.swarm import Swarm
 
-URI1 = 'radio://0/80/250K/E7E7E7E7E2'
+URI1 = 'radio://0/80/250K/E7E7E7E7E1'
 URI2 = 'radio://0/80/250K/E7E7E7E7EA'
 
 cflib.crtp.init_drivers(enable_debug_driver=False)
@@ -35,16 +35,8 @@ pr.execute()
 # pr.putCommand(paralelo.TAKEOFF, mc2)
 pr.execute()
 
-pr.putCommand(paralelo.HORARIO, mc1)
-# pr.putCommand(paralelo.HORARIO, mc2)
-pr.execute()
-
 pr.putCommand(paralelo.ZIGUEZAGUE, mc1)
 # pr.putCommand(paralelo.ZIGUEZAGUE, mc2)
-pr.execute()
-
-pr.putCommand(paralelo.DIAGONAL, mc1)
-# pr.putCommand(paralelo.DIAGONAL, mc2)
 pr.execute()
 
 pr.putCommand(paralelo.ARCO, mc1)
