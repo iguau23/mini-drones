@@ -76,11 +76,11 @@ class Paralelo:
             thread.setDaemon(True)
             self.threads[len(self.threads)]=thread
         elif(commandCode == UP):
-            thread = threading.Thread(target=MotionCommander.up, args=(mc, 0.2))
+            thread = threading.Thread(target=MotionCommander.up, args=(mc, 0.1))
             thread.setDaemon(True)
             self.threads[len(self.threads)]=thread
         elif(commandCode == DOWN):
-            thread = threading.Thread(target=MotionCommander.land, args=(mc, 0.2))
+            thread = threading.Thread(target=MotionCommander.land, args=(mc, 0.1))
             thread.setDaemon(True)
             self.threads[len(self.threads)]=thread
         elif(commandCode == TURNRIGHT):

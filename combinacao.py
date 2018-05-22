@@ -11,34 +11,47 @@ from cflib.positioning.motion_commander import MotionCommander
 from cflib.crazyflie.swarm import CachedCfFactory
 from cflib.crazyflie.swarm import Swarm
 
-def combinacao1(mc):
+def combinacao1(mc, dist = 0.8):
     pr = paralelo.Paralelo(mc)
 
     pr.putCommand(paralelo.TAKEOFF, mc)
     pr.execute()
 
-    pr.putCommand(paralelo.LINEAR, mc)
+    if(dist==0.5):
+        pr.putCommand(paralelo.UP, mc)
+        pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc, dist = dist)
     pr.execute()
 
-    pr.putCommand(paralelo.ZIGUEZAGUE, mc)
-    pr.execute()
-
-    pr.putCommand(paralelo.TURNRIGHT, mc)
-    pr.execute()
-
-    pr.putCommand(paralelo.ARCO, mc)
-    pr.execute()
-
-    pr.putCommand(paralelo.LOOP, mc)
+    pr.putCommand(paralelo.ZIGUEZAGUE, mc, dist = dist)
     pr.execute()
 
     pr.putCommand(paralelo.TURNRIGHT, mc)
     pr.execute()
 
-    pr.putCommand(paralelo.ESPIRAL, mc)
+    pr.putCommand(paralelo.LINEAR, mc, dist = dist)
     pr.execute()
 
-    pr.putCommand(paralelo.LINEAR, mc)
+    pr.putCommand(paralelo.ARCO, mc, dist = dist)
+    pr.execute()
+
+    pr.putCommand(paralelo.TURNRIGHT, mc)
+    pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc, dist=dist)
+    pr.execute()
+
+    pr.putCommand(paralelo.LOOP, mc, dist = dist)
+    pr.execute()
+
+    pr.putCommand(paralelo.TURNRIGHT, mc)
+    pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc, dist = dist)
+    pr.execute()
+
+    pr.putCommand(paralelo.ESPIRAL, mc, dist = dist)
     pr.execute()
 
     pr.putCommand(paralelo.TURNRIGHT, mc)
@@ -156,76 +169,84 @@ def combinacao3(mc1, mc2, mc3):
     pr.execute()
 
 def esquadrilha(mc1, mc2):
-    mcs={mc1, mc2}
-    pr = paralelo.Paralelo(mcs)
+    thread1 = threading.Thread(target=combinacao1, args=(mc1, 0.5))
+    thread1.setDaemon(True)
 
-    pr.putCommand(paralelo.TAKEOFF, mc1)
-    pr.putCommand(paralelo.TAKEOFF, mc2)
-    pr.execute()
+    thread2 = threading.Thread(target=combinacao1, args=(mc2,))
+    thread2.setDaemon(True)
 
-    pr.putCommand(paralelo.LINEAR, mc1, dist=0.5)
-    pr.putCommand(paralelo.LINEAR, mc2, dist=0.5)
-    pr.execute()
+    thread1.start()
+    time.sleep(6)
+    thread2.start()
 
-    pr.putCommand(paralelo.ZIGUEZAGUE, mc1, dist=0.5)
-    pr.putCommand(paralelo.ZIGUEZAGUE, mc2, dist=0.5)
-    pr.execute()
+    thread1.join()
+    thread2.join()
 
-    pr.putCommand(paralelo.LINEAR, mc2, dist=0.7)
-    pr.execute()
-
-    pr.putCommand(paralelo.TURNRIGHT, mc1)
-    pr.putCommand(paralelo.TURNRIGHT, mc2)
-    pr.execute()
-
-    pr.putCommand(paralelo.ZIGUEZAGUE, mc1, dist=0.5)
-    pr.putCommand(paralelo.ZIGUEZAGUE, mc2, dist=0.5)
-    pr.execute()
-
-    pr.putCommand(paralelo.LOOP, mc1, dist=0.6)
-    pr.putCommand(paralelo.LOOP, mc2, dist=0.6)
-    pr.execute()
-
-    pr.putCommand(paralelo.LINEAR, mc2, dist=0.7)
-    pr.execute()
-
-    pr.putCommand(paralelo.TURNRIGHT, mc1)
-    pr.putCommand(paralelo.TURNRIGHT, mc2)
-    pr.execute()
-
-    pr.putCommand(paralelo.LINEAR, mc1, dist=0.5)
-    pr.putCommand(paralelo.LINEAR, mc2, dist=0.5)
-    pr.execute()
-
-    pr.putCommand(paralelo.ESPIRAL, mc1, dist=0.5)
-    pr.putCommand(paralelo.ESPIRAL, mc2, dist=0.5)
-    pr.execute()
-
-    pr.putCommand(paralelo.LINEAR, mc2, dist=0.7)
-    pr.execute()
-
-    pr.putCommand(paralelo.TURNRIGHT, mc1)
-    pr.putCommand(paralelo.TURNRIGHT, mc2)
-    pr.execute()
-
-    pr.putCommand(paralelo.LINEAR, mc1, dist=0.5)
-    pr.putCommand(paralelo.LINEAR, mc2, dist=0.5)
-    pr.execute()
-
-    pr.putCommand(paralelo.ZIGUEZAGUE, mc1, dist=0.5)
-    pr.putCommand(paralelo.ZIGUEZAGUE, mc2, dist=0.5)
-    pr.execute()
-
-    pr.putCommand(paralelo.LINEAR, mc2, dist=0.7)
-    pr.execute()
-
-    pr.putCommand(paralelo.TURNRIGHT, mc1)
-    pr.putCommand(paralelo.TURNRIGHT, mc2)
-    pr.execute()
-
-    pr.putCommand(paralelo.LAND, mc1)
-    pr.putCommand(paralelo.LAND, mc2)
-    pr.execute()
+    # mcs={mc1, mc2}
+    # pr = paralelo.Paralelo(mcs)
+    #
+    # pr.putCommand(paralelo.TAKEOFF, mc1)
+    # pr.putCommand(paralelo.TAKEOFF, mc2)
+    # pr.execute()
+    #
+    # pr.putCommand(paralelo.LINEAR, mc1, dist=0.5)
+    # pr.execute()
+    #
+    # pr.putCommand(paralelo.ZIGUEZAGUE, mc1, dist=0.5)
+    # pr.putCommand(paralelo.LINEAR, mc2)
+    # pr.execute()
+    #
+    # pr.putCommand(paralelo.TURNRIGHT, mc1)
+    # pr.execute()
+    #
+    # pr.putCommand(paralelo.ARCO, mc1, dist=0.5)
+    # pr.putCommand(paralelo.ZIGUEZAGUE, mc2)
+    # pr.execute()
+    #
+    # pr.putCommand(paralelo.TURNRIGHT, mc2)
+    # pr.execute()
+    #
+    # pr.putCommand(paralelo.LOOP, mc1, dist=0.5)
+    # pr.putCommand(paralelo.ARCO, mc2)
+    # pr.execute()
+    #
+    # pr.putCommand(paralelo.TURNRIGHT, mc1)
+    # pr.execute()
+    #
+    # pr.putCommand(paralelo.ESPIRAL, mc1, dist=0.5)
+    # pr.putCommand(paralelo.LOOP, mc2)
+    # pr.execute()
+    #
+    # pr.putCommand(paralelo.TURNRIGHT, mc2)
+    # pr.execute()
+    #
+    # pr.putCommand(paralelo.LINEAR, mc1, dist=0.5)
+    # pr.putCommand(paralelo.ESPIRAL, mc2)
+    # pr.execute()
+    #
+    # pr.putCommand(paralelo.TURNRIGHT, mc1)
+    # pr.execute()
+    #
+    # pr.putCommand(paralelo.LINEAR, mc1, dist=0.5)
+    # pr.putCommand(paralelo.LINEAR, mc2)
+    # pr.execute()
+    #
+    # pr.putCommand(paralelo.TURNRIGHT, mc2)
+    # pr.execute()
+    #
+    # pr.putCommand(paralelo.LINEAR, mc1, dist=0.5)
+    # pr.putCommand(paralelo.LINEAR, mc2)
+    # pr.execute()
+    #
+    # pr.putCommand(paralelo.TURNRIGHT, mc1)
+    # pr.execute()
+    #
+    # pr.putCommand(paralelo.LAND, mc1)
+    # pr.putCommand(paralelo.LINEAR, mc2)
+    # pr.execute()
+    #
+    # pr.putCommand(paralelo.LAND, mc2)
+    # pr.execute
 
 def circulo(mc1, mc2):
     mcs={mc1, mc2}

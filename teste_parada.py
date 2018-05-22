@@ -39,7 +39,6 @@ pr.execute()
 pr.putCommand(paralelo.LINEAR, mc1)
 pr.execute()
 
-
 pr.putCommand(paralelo.LINEAR, mc1)
 pr.execute()
 
