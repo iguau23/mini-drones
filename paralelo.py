@@ -36,7 +36,7 @@ class Paralelo:
         self.mcs = mcs
         self.threads = {}
 
-    def putCommand(self, commandCode, mc):
+    def putCommand(self, commandCode, mc, dist=0.8):
         if(not(commandCode in commandsList)):
             print("comando invalido")
         elif(commandCode == TAKEOFF):
@@ -44,31 +44,31 @@ class Paralelo:
             thread.setDaemon(True)
             self.threads[len(self.threads)]=thread
         elif(commandCode == ARCO):
-            thread = threading.Thread(target=tr.arco, args=(mc, ))
+            thread = threading.Thread(target=tr.arco, args=(mc, dist))
             thread.setDaemon(True)
             self.threads[len(self.threads)]=thread
         elif(commandCode == DEGRAU):
-            thread = threading.Thread(target=tr.degrau, args=(mc, ))
+            thread = threading.Thread(target=tr.degrau, args=(mc, dist))
             thread.setDaemon(True)
             self.threads[len(self.threads)]=thread
         elif(commandCode == LINEAR):
-            thread = threading.Thread(target=tr.linear, args=(mc, ))
+            thread = threading.Thread(target=tr.linear, args=(mc, dist))
             thread.setDaemon(True)
             self.threads[len(self.threads)]=thread
         elif(commandCode == ZIGUEZAGUE):
-            thread = threading.Thread(target=tr.zigueZague, args=(mc, ))
+            thread = threading.Thread(target=tr.zigueZague, args=(mc, dist))
             thread.setDaemon(True)
             self.threads[len(self.threads)]=thread
         elif(commandCode == LOOP):
-            thread = threading.Thread(target=tr.loop, args=(mc, ))
+            thread = threading.Thread(target=tr.loop, args=(mc, dist))
             thread.setDaemon(True)
             self.threads[len(self.threads)]=thread
         elif(commandCode == ESPIRAL):
-            thread = threading.Thread(target=tr.espiral, args=(mc, ))
+            thread = threading.Thread(target=tr.espiral, args=(mc, dist))
             thread.setDaemon(True)
             self.threads[len(self.threads)]=thread
         elif(commandCode == CIRCULO):
-            thread = threading.Thread(target=tr.circulo, args=(mc, ))
+            thread = threading.Thread(target=tr.circulo, args=(mc, dist))
             thread.setDaemon(True)
             self.threads[len(self.threads)]=thread
         elif(commandCode == LAND):

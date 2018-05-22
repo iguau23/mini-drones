@@ -20,86 +20,86 @@ def turnLeft(mc):
     mc.turn_left(90)
     time.sleep(1)
 
-def linear(mc):
+def linear(mc, dist = DIST):
     if(mc.getStopMotion()):
         if(mc._is_flying):
             mc.land()
         return
     time.sleep(1)
-    mc.forward(1.5*DIST, velocity=0.5)
+    mc.forward(1.5*dist, velocity=0.5)
     time.sleep(1)
 
-def arco(mc):
+def arco(mc, dist = DIST):
     if(mc.getStopMotion()):
         if(mc._is_flying):
             mc.land()
         return
     time.sleep(1)
     mc.turn_left(90)
-    mc.circle_right(0.75*DIST, velocity=0.6, angle_degrees=180)
-    mc.forward(0.25*DIST, velocity=0.6)
+    mc.circle_right(0.75*dist, velocity=0.6, angle_degrees=180)
+    mc.forward(0.25*dist, velocity=0.6)
     mc.turn_left(90)
     time.sleep(1)
 
-def circulo(mc):
+def circulo(mc, dist = DIST):
     if(mc.getStopMotion()):
         if(mc._is_flying):
             mc.land()
         return
     time.sleep(1)
-    mc.forward(1.5*DIST, velocity=0.5)
-    mc.circle_left(1.5*DIST, velocity=0.5, angle_degrees=180)
-    mc.circle_left(1.2*DIST, velocity=0.5, angle_degrees=180)
-    mc.circle_left(0.8*DIST, velocity=0.5, angle_degrees=180)
+    mc.forward(1.5*dist, velocity=0.5)
+    mc.circle_left(1.5*dist, velocity=0.5, angle_degrees=180)
+    mc.circle_left(1.2*dist, velocity=0.5, angle_degrees=180)
+    mc.circle_left(0.8*dist, velocity=0.5, angle_degrees=180)
     time.sleep(1)
     mc.turn_left(180)
     time.sleep(1)
-    mc.circle_right(0.5*DIST, velocity=0.5, angle_degrees=180)
-    mc.circle_right(1.0*DIST, velocity=0.5, angle_degrees=180)
-    mc.circle_right(1.5*DIST, velocity=0.5, angle_degrees=180)
+    mc.circle_right(0.5*dist, velocity=0.5, angle_degrees=180)
+    mc.circle_right(1.0*dist, velocity=0.5, angle_degrees=180)
+    mc.circle_right(1.5*dist, velocity=0.5, angle_degrees=180)
     time.sleep(1)
     mc.turn_left(180)
     time.sleep(1)
 
-def zigueZague(mc):
+def zigueZague(mc, dist = DIST):
     if(mc.getStopMotion()):
         if(mc._is_flying):
             mc.land()
         return
     time.sleep(1)
-    mc.move_distance(0.4*DIST, 0.25, 0, velocity=0.4)
+    mc.move_distance(0.4*dist, 0.25, 0, velocity=0.4)
     time.sleep(1)
-    mc.move_distance(0.4*DIST, -0.25, 0, velocity=0.4)
+    mc.move_distance(0.4*dist, -0.25, 0, velocity=0.4)
     time.sleep(1)
-    mc.move_distance(0.4*DIST, 0.25, 0, velocity=0.4)
+    mc.move_distance(0.4*dist, 0.25, 0, velocity=0.4)
     time.sleep(1)
-    mc.move_distance(0.4*DIST, -0.25, 0, velocity=0.4)
+    mc.move_distance(0.4*dist, -0.25, 0, velocity=0.4)
     time.sleep(1)
 
-def degrau(mc):
+def degrau(mc, dist = DIST):
     if(mc.getStopMotion()):
         if(mc._is_flying):
             mc.land()
         return
     time.sleep(1)
-    mc.forward(0.4*DIST, velocity=0.5)
+    mc.forward(0.4*dist, velocity=0.5)
     mc.up(0.2)
     time.sleep(1)
-    mc.forward(0.3*DIST, velocity=0.5)
+    mc.forward(0.3*dist, velocity=0.5)
     mc.down(0.2)
     time.sleep(1)
-    mc.forward(0.3*DIST, velocity=0.5)
+    mc.forward(0.3*dist, velocity=0.5)
     mc.up(0.2)
-    mc.forward(0.4*DIST, velocity=0.5)
+    mc.forward(0.4*dist, velocity=0.5)
     time.sleep(1)
 
-def loop(mc):
+def loop(mc, dist = DIST):
     if(mc.getStopMotion()):
         if(mc._is_flying):
             mc.land()
         return
     time.sleep(1)
-    mc.forward(0.8*DIST, velocity=0.5)
+    mc.forward(0.8*dist, velocity=0.5)
     time.sleep(1)
     #loop
     if(mc.getStopMotion()):
@@ -123,14 +123,14 @@ def loop(mc):
     mc.stop()
     #fim do loop
     time.sleep(1)
-    mc.forward(0.7*DIST, velocity=0.5)
+    mc.forward(0.7*dist, velocity=0.5)
 
-def espiral(mc):
+def espiral(mc, dist = DIST):
     #parametros
     velocity = 0.2
     velocity_circle = 0.3
     radius_m = 0.15
-    distance = 1.4*DIST
+    distance = 1.4*dist
     angular_velocity = velocity_circle/radius_m
     flight_time = distance/velocity
     theta = 0

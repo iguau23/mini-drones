@@ -47,6 +47,7 @@ def combinacao1(mc):
     pr.putCommand(paralelo.LAND, mc)
     pr.execute()
 
+
 def combinacao2(mc1, mc2):
     mcs={mc1, mc2}
     pr = paralelo.Paralelo(mcs)
@@ -153,6 +154,121 @@ def combinacao3(mc1, mc2, mc3):
     pr.putCommand(paralelo.LAND, mc2)
     pr.putCommand(paralelo.LAND, mc3)
     pr.execute()
+
+def esquadrilha(mc1, mc2):
+    mcs={mc1, mc2}
+    pr = paralelo.Paralelo(mcs)
+
+    pr.putCommand(paralelo.TAKEOFF, mc1)
+    pr.putCommand(paralelo.TAKEOFF, mc2)
+    pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc1, dist=0.5)
+    pr.putCommand(paralelo.LINEAR, mc2, dist=0.5)
+    pr.execute()
+
+    pr.putCommand(paralelo.ZIGUEZAGUE, mc1, dist=0.5)
+    pr.putCommand(paralelo.ZIGUEZAGUE, mc2, dist=0.5)
+    pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc2, dist=0.7)
+    pr.execute()
+
+    pr.putCommand(paralelo.TURNRIGHT, mc1)
+    pr.putCommand(paralelo.TURNRIGHT, mc2)
+    pr.execute()
+
+    pr.putCommand(paralelo.ZIGUEZAGUE, mc1, dist=0.5)
+    pr.putCommand(paralelo.ZIGUEZAGUE, mc2, dist=0.5)
+    pr.execute()
+
+    pr.putCommand(paralelo.LOOP, mc1, dist=0.6)
+    pr.putCommand(paralelo.LOOP, mc2, dist=0.6)
+    pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc2, dist=0.7)
+    pr.execute()
+
+    pr.putCommand(paralelo.TURNRIGHT, mc1)
+    pr.putCommand(paralelo.TURNRIGHT, mc2)
+    pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc1, dist=0.5)
+    pr.putCommand(paralelo.LINEAR, mc2, dist=0.5)
+    pr.execute()
+
+    pr.putCommand(paralelo.ESPIRAL, mc1, dist=0.5)
+    pr.putCommand(paralelo.ESPIRAL, mc2, dist=0.5)
+    pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc2, dist=0.7)
+    pr.execute()
+
+    pr.putCommand(paralelo.TURNRIGHT, mc1)
+    pr.putCommand(paralelo.TURNRIGHT, mc2)
+    pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc1, dist=0.5)
+    pr.putCommand(paralelo.LINEAR, mc2, dist=0.5)
+    pr.execute()
+
+    pr.putCommand(paralelo.ZIGUEZAGUE, mc1, dist=0.5)
+    pr.putCommand(paralelo.ZIGUEZAGUE, mc2, dist=0.5)
+    pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc2, dist=0.7)
+    pr.execute()
+
+    pr.putCommand(paralelo.TURNRIGHT, mc1)
+    pr.putCommand(paralelo.TURNRIGHT, mc2)
+    pr.execute()
+
+    pr.putCommand(paralelo.LAND, mc1)
+    pr.putCommand(paralelo.LAND, mc2)
+    pr.execute()
+
+def circulo(mc1, mc2):
+    mcs={mc1, mc2}
+    pr = paralelo.Paralelo(mcs)
+
+    pr.putCommand(paralelo.TAKEOFF, mc1)
+    pr.putCommand(paralelo.TAKEOFF, mc2)
+    pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc1)
+    pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc1, dist=0.5)
+    pr.execute()
+
+    pr.putCommand(paralelo.TURNRIGHT, mc1)
+    pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc1, dist=0.5)
+    pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc1)
+    pr.execute()
+
+    pr.putCommand(paralelo.TURNRIGHT, mc1)
+    pr.execute()
+
+    pr.putCommand(paralelo.CIRCULO, mc1)
+    pr.putCommand(paralelo.CIRCULO, mc2)
+    pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc1)
+    pr.putCommand(paralelo.LINEAR, mc2)
+    pr.execute()
+
+    pr.putCommand(paralelo.TURNRIGHT, mc1)
+    pr.putCommand(paralelo.TURNRIGHT, mc2)
+    pr.execute()
+
+    pr.putCommand(paralelo.LAND, mc1)
+    pr.putCommand(paralelo.LAND, mc2)
+    pr.execute()
+
 
 def combinacaoArcos(mc):
     pr = paralelo.Paralelo(mc)
