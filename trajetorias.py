@@ -54,11 +54,9 @@ def circulo(mc, dist = DIST):
     time.sleep(1)
     mc.turn_left(180)
     time.sleep(1)
-    mc.circle_right(0.5*dist, velocity=0.5, angle_degrees=180)
+    mc.circle_right(0.7*dist, velocity=0.5, angle_degrees=180)
     mc.circle_right(1.0*dist, velocity=0.5, angle_degrees=180)
-    mc.circle_right(1.5*dist, velocity=0.5, angle_degrees=180)
-    time.sleep(1)
-    mc.turn_left(180)
+    mc.circle_right(1.3*dist, velocity=0.5, angle_degrees=180)
     time.sleep(1)
 
 def zigueZague(mc, dist = DIST):

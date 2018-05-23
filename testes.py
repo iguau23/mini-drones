@@ -21,6 +21,8 @@ CIRCULOS = '5'
 TESTBATTERY = '9'
 TESTSUBIDA = '0'
 SELECT = '123'
+FINALIZA_TESTE = '99'
+SAIR = 's'
 
 class Teste():
     def __init__(self):
@@ -84,7 +86,7 @@ class Teste():
             lg_stab.start()
         except AttributeError:
             print('Could not add Stabilizer log config, bad configuration.')
-        time.sleep(0.2)
+        time.sleep(0.3)
         lg_stab.stop()
 
     def stab_log_data(self, timestamp, data, logconf):
@@ -129,7 +131,7 @@ class Teste():
         self.selectDrone()
 
         selectedTest = 'start'
-        while(selectedTest != 's'):
+        while(selectedTest != '99'):
             self.isAlive = True
             messageTest = ("\nQual teste você deseja fazer?\n"
                           "(1) Combinacao1\n"
@@ -140,6 +142,7 @@ class Teste():
                           "(9) bateria\n"
                           "(0) subida\n"
                           "(123) selecionar drone\n"
+                          "(99) finalizar teste\n"
                           "(s) sair\n")
             selectedTest = input(messageTest)
 
@@ -177,20 +180,21 @@ class Teste():
                 for sync in self.scfs:
                     sync.close_link()
                 self.selectDrone()
+            elif(selectedTest == SAIR):
+                for sync in self.scfs:
+                    sync.close_link()
+                print("\n===============================================================================\n"
+                      "     Obrigado por terem utilizado o nosso mini-drones tests!\n"
+                      "                      Espero que tenham gostado!\n"
+                      "===============================================================================\n")
+                break
 
             #zera o pouso emergencial
             for mc in self.mcs:
                 mc.setStopMotion(False)
 
 
-        for sync in self.scfs:
-            sync.close_link()
 
-
-        print("\n===============================================================================\n"
-              "     Obrigado por terem utilizado o nosso mini-drones tests!\n"
-              "                      Espero que tenham gostado!\n"
-              "===============================================================================\n")
 if __name__ == '__main__':
     teste = Teste()
     teste.start()
