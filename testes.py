@@ -26,10 +26,10 @@ SAIR = 's'
 
 class Teste():
     def __init__(self):
-        URI1 = 'radio://0/80/250K/E7E7E7E7E1'
-        URI2 = 'radio://0/80/250K/E7E7E7E7E2'
-        URI3 = 'radio://0/80/250K/E7E7E7E7E3'
-        URI4 = 'radio://0/80/250K/E7E7E7E7E7'
+        URI1 = 'radio://0/80/2M/E7E7E7E7E1'
+        URI2 = 'radio://0/80/2M/E7E7E7E7E2'
+        URI3 = 'radio://0/80/2M/E7E7E7E7E3'
+        URI4 = 'radio://0/80/2M/E7E7E7E7E4'
         self.uris = [URI1, URI2, URI3, URI4]
 
     def pouso_emergencial(self):
@@ -44,11 +44,12 @@ class Teste():
             entrada = input("pouso emergencial - Drone (1), (2), (3) OU (4): ")
             if(entrada == ""): # se vazio, sai
                 break
-            entrada = int(entrada)
-            n = self.selected.index(entrada)
-            if(n!=-1):
-                self.mcs[n].setStopMotion(True)
-                print("pouso emergencial %d acionado" %entrada)
+            if(entrada  in '1234'):
+                entrada = int(entrada)
+                n = self.selected.index(entrada)
+                if(n!=-1):
+                    self.mcs[n].setStopMotion(True)
+                    print("pouso emergencial %d acionado" %entrada)
 
     def setThreadEmergencial(self):
         #inicia a thread para o pouso emergencial
@@ -103,8 +104,9 @@ class Teste():
         self.mcs = []
         self.selected = []
         message = 'Quais drones deseja controlar? (1, 2, 3, 4 ou combinacao delas):'
-        user_input_numbers = input(message)
+
         while(len(self.selected)==0):
+            user_input_numbers = input(message)
             if(user_input_numbers.find('1')!=-1):
                 self.selected.append(1)
             if(user_input_numbers.find('2')!=-1):
@@ -142,9 +144,16 @@ class Teste():
                           "(9) bateria\n"
                           "(0) subida\n"
                           "(123) selecionar drone\n"
-                          "(99) finalizar teste\n"
-                          "(s) sair\n")
+                          "(99) finalizar teste\n")
             selectedTest = input(messageTest)
+
+            #Verifica se não houve perda de conexão
+            for cf in self.cfs:
+                if (cf.link == None):
+                    print("conexao com o drone perdida")
+                    selectedTest = SELECT
+                    break
+
 
             if (selectedTest == COMB1):
                 self.setThreadEmergencial()

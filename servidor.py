@@ -13,12 +13,23 @@ class Servidor():
 
     def solicitar_conexao(self):
         print("conectado")
+        #joga fora o primeiro comando que estiver na pilha
+        r = requests.get(URL_POP)
+
         r = requests.get(URL_POP)
         while(r.text=='empty'):
             if(self.cancelarConexao==True):
                 break
+
+            #Verifica se não houve perda de conexão
+            for cf in self.mTeste.cfs:
+                if (cf.link == None):
+                    print("conexao com o drone perdida")
+                    self.cancelarConexao = True
+
             r = requests.get(URL_POP)
             time.sleep(1)
+
         self.comando = r.text
 
     def cancela_comando(self):
@@ -26,7 +37,8 @@ class Servidor():
         if(entrada=='cancela'):
             self.cancelarConexao = True
 
-    def verificar_comando(self):
+    def verificar_comando(self, mTeste):
+        self.mTeste = mTeste
         threadComando = threading.Thread(target=self.solicitar_conexao)
         threadComando.setDaemon(True)
 

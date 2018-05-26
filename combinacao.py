@@ -191,11 +191,9 @@ def circulo(mc1, mc2):
     pr.execute()
 
     time.sleep(1)
-    mc1.turn_left(45)
+    mc1.move_distance(2, 2, 0, velocity=0.8)
     time.sleep(1)
-    mc1.forward(2.8, velocity=0.8)
-    time.sleep(1)
-    mc1.turn_left(135)
+    mc1.turn_right(180)
 
     pr.putCommand(paralelo.CIRCULO, mc1)
     pr.putCommand(paralelo.CIRCULO, mc2)

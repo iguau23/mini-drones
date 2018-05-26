@@ -5,27 +5,60 @@ import combinacao
 
 continueMain = True
 continueTeste = True
-continueConexao = True
 while(continueTeste):
     print("iniciando testes\n")
     mTeste = Teste()
     mTeste.start()
 
+    continueConexao = True
     while(continueConexao):
         mServidor = Servidor()
-        mServidor.verificar_comando()
+        mServidor.verificar_comando(mTeste)
 
         if (mServidor.comando=="linear"): #com um drone apenas
-            print("linear")
-            combinacao.combinacao1(mTeste.mcs[0])
+            if(len(mTeste.mcs)>=1):
+                print("linear")
+                mTeste.setThreadEmergencial()
+                combinacao.combinacao1(mTeste.mcs[0])
+            else:
+                print("numero insuficiente")
         if (mServidor.comando=="zigzag"): #com um drone apenas
             print("zigzag")
-            combinacao.arco(mTeste.mcs[0], mTeste.mcs[1])
+            if (len(mTeste.mcs)==2):
+                mTeste.setThreadEmergencial()
+                combinacao.circulo(mTeste.mcs[0], mTeste.mcs[1])
+            else:
+                print("numero insuficiente")
         if (mServidor.comando=="loop"):
             print("loop")
-            combinacao.esquadrilha(mTeste.mcs[0], mTeste.mcs[1])
+            mTeste.setThreadEmergencial()
+            if (len(mTeste.mcs)==2):
+                mTeste.setThreadEmergencial()
+                combinacao.esquadrilha(mTeste.mcs[0], mTeste.mcs[1])
+            else:
+                print("numero insuficiente")
+            
 
-        entrada = input("")
+        #zera o pouso emergencial
+        for mc in mTeste.mcs:
+            mc.setStopMotion(False)
+
+        entrada = 'start'
+
+        entrada = input("tecle enter para continuar, ou digite algo para reiniciar conexao:  ")
+
+        if (entrada == ""):
+            continueConexao = True
+        else:
+            continueConexao = False
+
 
     for sync in mTeste.scfs:
         sync.close_link()
+    entrada = 'start'
+    # while ((entrada != 'y') and (entrada!= 'n')):
+    #     entrada = input("deseja fazer novos testes?[y]es ou [n]o: ")
+    # if (entrada == 'y'):
+    #     continueTeste = True
+    # else:
+    #     continueTeste = False
