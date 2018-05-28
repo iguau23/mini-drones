@@ -33,7 +33,7 @@ def combinacao1(mc, dist = 0.8):
     pr.putCommand(paralelo.LINEAR, mc, dist = dist)
     pr.execute()
 
-    pr.putCommand(paralelo.ARCO, mc, dist = dist)
+    pr.putCommand(paralelo.LOOP, mc, dist = dist)
     pr.execute()
 
     pr.putCommand(paralelo.TURNRIGHT, mc)
@@ -42,7 +42,7 @@ def combinacao1(mc, dist = 0.8):
     pr.putCommand(paralelo.LINEAR, mc, dist=dist)
     pr.execute()
 
-    pr.putCommand(paralelo.LOOP, mc, dist = dist)
+    pr.putCommand(paralelo.ESPIRAL, mc, dist = dist)
     pr.execute()
 
     pr.putCommand(paralelo.TURNRIGHT, mc)
@@ -51,7 +51,7 @@ def combinacao1(mc, dist = 0.8):
     pr.putCommand(paralelo.LINEAR, mc, dist = dist)
     pr.execute()
 
-    pr.putCommand(paralelo.ESPIRAL, mc, dist = dist)
+    pr.putCommand(paralelo.ARCO, mc, dist = dist)
     pr.execute()
 
     pr.putCommand(paralelo.TURNRIGHT, mc)
@@ -191,7 +191,7 @@ def circulo(mc1, mc2):
     pr.execute()
 
     time.sleep(1)
-    mc1.move_distance(2, 2, 0, velocity=0.8)
+    mc1.move_distance(1.8, 1.8, 0, velocity=0.8)
     time.sleep(1)
     mc1.turn_right(180)
 

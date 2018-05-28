@@ -15,29 +15,33 @@ while(continueTeste):
         mServidor = Servidor()
         mServidor.verificar_comando(mTeste)
 
-        if (mServidor.comando=="linear"): #com um drone apenas
-            if(len(mTeste.mcs)>=1):
-                print("linear")
+        if (mServidor.comando=="demo"): #com um drone apenas
+            if(len(mTeste.mcs)==1):
+                print("demo")
                 mTeste.setThreadEmergencial()
                 combinacao.combinacao1(mTeste.mcs[0])
+            elif(len(mTeste.mcs)==2):
+                print("demo")
+                mTeste.setThreadEmergencial()
+                combinacao.combinacao1(mTeste.mcs[1])
             else:
                 print("numero insuficiente")
-        if (mServidor.comando=="zigzag"): #com um drone apenas
-            print("zigzag")
+        if (mServidor.comando=="espiral"): #com um drone apenas
+            print("espiral")
             if (len(mTeste.mcs)==2):
                 mTeste.setThreadEmergencial()
                 combinacao.circulo(mTeste.mcs[0], mTeste.mcs[1])
             else:
                 print("numero insuficiente")
-        if (mServidor.comando=="loop"):
-            print("loop")
+        if (mServidor.comando=="esquadrilha"):
+            print("esquadrilha")
             mTeste.setThreadEmergencial()
             if (len(mTeste.mcs)==2):
                 mTeste.setThreadEmergencial()
                 combinacao.esquadrilha(mTeste.mcs[0], mTeste.mcs[1])
             else:
                 print("numero insuficiente")
-            
+
 
         #zera o pouso emergencial
         for mc in mTeste.mcs:
