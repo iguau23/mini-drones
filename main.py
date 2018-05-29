@@ -15,6 +15,8 @@ while(continueTeste):
         mServidor = Servidor()
         mServidor.verificar_comando(mTeste)
 
+        mServidor.setExecutando(True)
+
         if (mServidor.comando=="demo"): #com um drone apenas
             if(len(mTeste.mcs)==1):
                 print("demo")
@@ -41,6 +43,8 @@ while(continueTeste):
                 combinacao.esquadrilha(mTeste.mcs[0], mTeste.mcs[1])
             else:
                 print("numero insuficiente")
+
+        mServidor.setExecutando(False)
 
 
         #zera o pouso emergencial

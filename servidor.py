@@ -10,6 +10,11 @@ class Servidor():
     def __init__(self):
         self.comando = "empty"
         self.cancelarConexao = False
+        self.executando = False
+
+    def setExecutando(self, value):
+        self.executando = value;
+        #r = request.get()
 
     def solicitar_conexao(self):
         print("conectado")

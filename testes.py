@@ -26,10 +26,10 @@ SAIR = 's'
 
 class Teste():
     def __init__(self):
-        URI1 = 'radio://0/80/2M/E7E7E7E7E1'
-        URI2 = 'radio://0/80/2M/E7E7E7E7E2'
-        URI3 = 'radio://0/80/2M/E7E7E7E7E3'
-        URI4 = 'radio://0/80/2M/E7E7E7E7E4'
+        URI1 = 'radio://0/10/2M/E7E7E7E7E1'
+        URI2 = 'radio://0/20/2M/E7E7E7E7E2'
+        URI3 = 'radio://0/30/2M/E7E7E7E7E3'
+        URI4 = 'radio://0/40/2M/E7E7E7E7E4'
         self.uris = [URI1, URI2, URI3, URI4]
 
     def pouso_emergencial(self):
