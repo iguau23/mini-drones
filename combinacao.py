@@ -169,10 +169,10 @@ def combinacao3(mc1, mc2, mc3):
     pr.execute()
 
 def esquadrilha(mc1, mc2):
-    thread1 = threading.Thread(target=combinacao1, args=(mc1, 0.5))
+    thread1 = threading.Thread(target=combEsquadrilha, args=(mc1, 0.5))
     thread1.setDaemon(True)
 
-    thread2 = threading.Thread(target=combinacao1, args=(mc2,))
+    thread2 = threading.Thread(target=combEsquadrilha, args=(mc2,))
     thread2.setDaemon(True)
 
     thread1.start()
@@ -181,6 +181,55 @@ def esquadrilha(mc1, mc2):
 
     thread1.join()
     thread2.join()
+
+def combEsquadrilha(mc, dist = 0.8):
+    pr = paralelo.Paralelo(mc)
+
+    pr.putCommand(paralelo.TAKEOFF, mc)
+    pr.execute()
+
+    # if(dist==0.5):
+    #     pr.putCommand(paralelo.UP, mc)
+    #     pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc, dist = dist)
+    pr.execute()
+
+    pr.putCommand(paralelo.ZIGUEZAGUE, mc, dist = dist)
+    pr.execute()
+
+    pr.putCommand(paralelo.TURNRIGHT, mc)
+    pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc, dist = dist)
+    pr.execute()
+
+    pr.putCommand(paralelo.ARCO, mc, dist = dist)
+    pr.execute()
+
+    pr.putCommand(paralelo.TURNRIGHT, mc)
+    pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc, dist=dist)
+    pr.execute()
+
+    pr.putCommand(paralelo.ESPIRAL, mc, dist = dist)
+    pr.execute()
+
+    pr.putCommand(paralelo.TURNRIGHT, mc)
+    pr.execute()
+
+    pr.putCommand(paralelo.LINEAR, mc, dist = dist)
+    pr.execute()
+
+    pr.putCommand(paralelo.ZIGUEZAGUE, mc, dist = dist)
+    pr.execute()
+
+    pr.putCommand(paralelo.TURNRIGHT, mc)
+    pr.execute()
+
+    pr.putCommand(paralelo.LAND, mc)
+    pr.execute()
 
 def circulo(mc1, mc2):
     mcs={mc1, mc2}
@@ -191,7 +240,7 @@ def circulo(mc1, mc2):
     pr.execute()
 
     time.sleep(1)
-    mc1.move_distance(1.8, 1.8, 0, velocity=0.8)
+    mc1.move_distance(1.7, 1.7, 0, velocity=0.8)
     time.sleep(1)
     mc1.turn_right(180)
 
@@ -213,40 +262,13 @@ def circulo(mc1, mc2):
 
 def ajusteCirculo1(mc):
     mc.turn_left(180)
-    mc.forward(1, velocity=0.8)
+    mc.forward(0.4, velocity=0.8)
     mc.turn_left(90)
-    mc.forward(2, velocity = 0.8)
+    mc.forward(1.6, velocity = 0.8)
     mc.turn_left(90)
     mc.land()
 
 def ajusteCirculo2(mc):
-    mc.forward(1, velocity = 0.5)
+    mc.move_distance(1.4, -0.1, 0, velocity = 0.5)
     mc.turn_left(180)
     mc.land()
-
-def combinacaoArcos(mc):
-    pr = paralelo.Paralelo(mc)
-
-    pr.putCommand(paralelo.TAKEOFF, mc)
-    pr.execute()
-
-    pr.putCommand(paralelo.ARCO, mc)
-    pr.execute()
-
-    pr.putCommand(paralelo.ARCO, mc)
-    pr.execute()
-
-    pr.putCommand(paralelo.TURNRIGHT, mc)
-    pr.execute()
-
-    pr.putCommand(paralelo.ARCO, mc)
-    pr.execute()
-
-    pr.putCommand(paralelo.ARCO, mc)
-    pr.execute()
-
-    pr.putCommand(paralelo.TURNRIGHT, mc)
-    pr.execute()
-
-    pr.putCommand(paralelo.LAND, mc)
-    pr.execute()

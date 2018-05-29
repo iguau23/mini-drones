@@ -47,16 +47,16 @@ def circulo(mc, dist = DIST):
             mc.land()
         return
     time.sleep(1)
-    mc.forward(1.5*dist, velocity=0.5)
-    mc.circle_left(1.5*dist, velocity=0.5, angle_degrees=180)
-    mc.circle_left(1.2*dist, velocity=0.5, angle_degrees=180)
-    mc.circle_left(0.8*dist, velocity=0.5, angle_degrees=180)
+    mc.forward(1.2*dist, velocity=0.7)
+    mc.circle_left(1.3*dist, velocity=0.7, angle_degrees=180)
+    mc.circle_left(1.0*dist, velocity=0.7, angle_degrees=180)
+    mc.circle_left(0.7*dist, velocity=0.7, angle_degrees=180)
     time.sleep(1)
     mc.turn_left(180)
     time.sleep(1)
-    mc.circle_right(0.7*dist, velocity=0.5, angle_degrees=180)
-    mc.circle_right(1.0*dist, velocity=0.5, angle_degrees=180)
-    mc.circle_right(1.3*dist, velocity=0.5, angle_degrees=180)
+    mc.circle_right(0.7*dist, velocity=0.7, angle_degrees=180)
+    mc.circle_right(1.0*dist, velocity=0.7, angle_degrees=180)
+    mc.circle_right(1.3*dist, velocity=0.7, angle_degrees=180)
     time.sleep(1)
 
 def zigueZague(mc, dist = DIST):
