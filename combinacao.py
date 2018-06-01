@@ -176,11 +176,16 @@ def esquadrilha(mc1, mc2):
     pr.putCommand(paralelo.TAKEOFF, mc2)
     pr.execute()
 
-    time.sleep(1)
-    mc1.move_distance(1.3, 0, 0, velocity=0.8)
-    time.sleep(1)
-    mc1.turn_left(90)
-    time.sleep(1)
+    thread1 = threading.Thread(target=ajusteIniEsquadrilha, args=(mc1,))
+    thread1.setDaemon(True)
+
+    thread2 = threading.Thread(target=espera, args=(mc2, 5))
+    thread2.setDaemon(True)
+
+    thread1.start()
+    thread2.start()
+    thread1.join()
+    thread2.join()
 
     pr.putCommand(paralelo.LINEAR, mc1, dist = 0.5)
     pr.putCommand(paralelo.LINEAR, mc2, dist = 0.7)
@@ -227,16 +232,12 @@ def esquadrilha(mc1, mc2):
     time.sleep(1)
     mc2.land()
 
-def combEsquadrilha(mc, dist = 0.8):
-    tr.linear(mc, dist = dist)
-    tr.zigueZague(mc, dist = dist)
-    tr.turnLeft(mc, dist = dist)
-    tr.linear(mc, dist=dist)
-    tr.arco(mc, dist=dist)
-    tr.turnRight(mc, dist=dist)
-    tr.linear(mc, dist=dist)
-    tr.espiral(mc, dist=dist)
-    tr.turnRight(mc, dist)
+def ajusteIniEsquadrilha(mc):
+    mc.safeSleep(1)
+    mc.move_distance(1.3, 0, 0, velocity=0.8)
+    mc.safeSleep(1)
+    mc.turn_left(90)
+    mc.safeSleep(1)
 
 
 
@@ -248,10 +249,17 @@ def circulo(mc1, mc2):
     pr.putCommand(paralelo.TAKEOFF, mc2)
     pr.execute()
 
-    time.sleep(1)
-    mc1.move_distance(1.7, 1.7, 0, velocity=0.8)
-    time.sleep(1)
-    mc1.turn_right(180)
+    thread1 = threading.Thread(target=ajusteIniCirculo, args=(mc1,))
+    thread1.setDaemon(True)
+
+    thread2 = threading.Thread(target=espera, args=(mc2, 3))
+    thread2.setDaemon(True)
+
+    thread1.start()
+    thread2.start()
+
+    thread1.join()
+    thread2.join()
 
     pr.putCommand(paralelo.CIRCULO, mc1)
     pr.putCommand(paralelo.CIRCULO, mc2)
@@ -269,6 +277,12 @@ def circulo(mc1, mc2):
     thread1.join()
     thread2.join()
 
+def ajusteIniCirculo(mc):
+    mc.safeSleep(1)
+    mc.move_distance(1.7, 1.7, 0, velocity=0.8)
+    mc.safeSleep(1)
+    mc.turn_right(180)
+
 def ajusteCirculo1(mc):
     mc.turn_left(180)
     mc.forward(0.4, velocity=0.8)
@@ -281,3 +295,6 @@ def ajusteCirculo2(mc):
     mc.move_distance(1.4, -0.1, 0, velocity = 0.5)
     mc.turn_left(180)
     mc.land()
+
+def espera(mc, time = 3):
+    mc.safeSleep(time)

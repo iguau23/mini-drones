@@ -44,7 +44,8 @@ class Teste():
             entrada = input("pouso emergencial - Drone (1), (2), (3) OU (4): ")
             if(entrada == ""): # se vazio, sai
                 break
-            if(entrada  in '1234'):
+            if(entrada  in ['1','2','3','4']):
+                print("entrou aqui")
                 entrada = int(entrada)
                 n = self.selected.index(entrada)
                 if(n!=-1):
@@ -74,6 +75,19 @@ class Teste():
         mc.take_off()
         time.sleep(2)
         mc.land()
+
+    def testeSubida2(self, mc1, mc2):
+        thread1 = threading.Thread(target=self.testeSubida, args=(mc1,))
+        thread1.setDaemon(True)
+
+        thread2 = threading.Thread(target=self.testeSubida, args=(mc2,))
+        thread2.setDaemon(True)
+
+        thread1.start()
+        thread2.start()
+
+        thread1.join()
+        thread2.join()
 
     def testeBateria(self, cf):
         time.sleep(0.5)
@@ -179,12 +193,10 @@ class Teste():
                     self.testeBateria(self.cfs[0])
                 time.sleep(0.5)
             elif(selectedTest == TESTSUBIDA):
-                if(len(self.selected)>1):
-                    d = int(input("selecione o drone: "))
-                    n = self.selected.index(d)
-                    self.testeSubida(self.mcs[n])
-                else:
+                if(len(self.selected)==1):
                     self.testeSubida(self.mcs[0])
+                else:
+                    self.testeSubida2(self.mcs[0], self.mcs[1])
             elif(selectedTest == SELECT):
                 for sync in self.scfs:
                     sync.close_link()

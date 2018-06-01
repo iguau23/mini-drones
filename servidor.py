@@ -39,8 +39,10 @@ class Servidor():
 
     def cancela_comando(self):
         entrada = input("digite \'cancela\' para cancelar: ")
-        if(entrada=='cancela'):
-            self.cancelarConexao = True
+        while(not self.cancelarConexao):
+            if(entrada=='cancela'):
+                self.cancelarConexao = True
+                break
 
     def verificar_comando(self, mTeste):
         self.mTeste = mTeste
