@@ -6,6 +6,8 @@ import threading
 URL_POP = 'https://3vkeycenej.execute-api.us-east-1.amazonaws.com/prod/CIAB-2018-DroneCommandQueue?droneId=drone1&operation=POP&secret=dr0neRulez2A5T7U'
 URL_PEEK = 'https://3vkeycenej.execute-api.us-east-1.amazonaws.com/prod/CIAB-2018-DroneCommandQueue?droneId=drone1&operation=PEEK&secret=dr0neRulez2A5T7U'
 
+URL_PUSH_STATUS = 'https://3vkeycenej.execute-api.us-east-1.amazonaws.com/prod/CIAB-2018-DroneCommandQueue?operation=PUSH&secret=dr0neRulez2A5T7U&droneId=status&command='
+
 class Servidor():
     def __init__(self):
         self.comando = "empty"
@@ -56,3 +58,6 @@ class Servidor():
         threadCancela.start()
 
         threadComando.join()
+
+    def push_status(command):
+        r = requests.get(URL_PUSH_STATUS + command)

@@ -45,7 +45,6 @@ class Teste():
             if(entrada == ""): # se vazio, sai
                 break
             if(entrada  in ['1','2','3','4']):
-                print("entrou aqui")
                 entrada = int(entrada)
                 n = self.selected.index(entrada)
                 if(n!=-1):
