@@ -11,7 +11,7 @@ from cflib.positioning.motion_commander import MotionCommander
 from cflib.crazyflie.swarm import CachedCfFactory
 from cflib.crazyflie.swarm import Swarm
 
-def combinacao1(mc, dist = 0.8):
+def combinacao1(mc, dist = 0.7):
     pr = paralelo.Paralelo(mc)
 
     pr.putCommand(paralelo.TAKEOFF, mc)

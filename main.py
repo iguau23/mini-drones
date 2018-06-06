@@ -8,10 +8,10 @@ class Main():
     def start(self):
         continueMain = True
         continueTeste = True
-        Servidor.push_status("iniciando...")
+        Servidor.push_status("Iniciando...")
         while(continueTeste):
             print("iniciando testes\n")
-            Servidor.push_status("preparando drone...")
+            Servidor.push_status("Preparando drone...")
             mTeste = Teste()
             mTeste.start()
 
@@ -54,7 +54,7 @@ class Main():
                         print("numero insuficiente")
 
                 mServidor.setExecutando(False)
-                Servidor.push_status("movimento executado")
+                Servidor.push_status("Movimento executado")
 
 
                 #zera o pouso emergencial
@@ -80,6 +80,6 @@ if __name__ =='__main__':
     try:
         main.start()
     except (KeyboardInterrupt, SystemExit):
-        Servidor.push_status("movimento executado")
-        time.sleep(0.5)
-        Servidor.push_status("iniciando...")
+        Servidor.push_status("Movimento executado")
+        time.sleep(0.2)
+        Servidor.push_status("Iniciando...")
