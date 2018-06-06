@@ -59,5 +59,16 @@ class Servidor():
 
         threadComando.join()
 
+    def verificar_prepara():
+        print("esperando prepara")
+        #joga fora o primeiro comando da pilha
+        r = requests.get(URL_POP)
+
+        r = requests.get(URL_POP)
+        while(r.text!= "preparar"):
+            r = requests.get(URL_POP)
+            time.sleep(1)
+
+
     def push_status(command):
         r = requests.get(URL_PUSH_STATUS + command)
