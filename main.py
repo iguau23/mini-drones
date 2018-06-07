@@ -14,8 +14,9 @@ class Main():
 
 
         while(continueTeste):
+            mServidor = Servidor()
             Servidor.push_status("Disponível")
-            Servidor.verificar_prepara()
+            mServidor.verificar_prepara()
             duration = 1  # second
             freq = 440  # Hz
             os.system('play --no-show-progress --null --channels 1 synth %s sine %f' % (duration, freq))
@@ -25,7 +26,7 @@ class Main():
             mTeste.start()
 
             Servidor.push_status("Pronto! Aguardando comando")
-            mServidor = Servidor()
+
             mServidor.verificar_comando(mTeste)
 
             mServidor.setExecutando(True)

@@ -10,6 +10,7 @@ URL_PUSH_STATUS = 'https://3vkeycenej.execute-api.us-east-1.amazonaws.com/prod/C
 
 class Servidor():
     def __init__(self):
+        self.cancelar_prepara = False
         self.comando = "empty"
         self.cancelarConexao = False
         self.executando = False
@@ -40,8 +41,9 @@ class Servidor():
         self.comando = r.text
 
     def cancela_comando(self):
-        entrada = input("digite \'cancela\' para cancelar: ")
+
         while(not self.cancelarConexao):
+            entrada = input("digite \'cancela\' para cancelar: ")
             if(entrada=='cancela'):
                 self.cancelarConexao = True
                 break
@@ -59,15 +61,36 @@ class Servidor():
 
         threadComando.join()
 
-    def verificar_prepara():
+    def verificar_prepara(self):
+        threadEsperaPrepara = threading.Thread(target=self.espera_prepara)
+        threadEsperaPrepara.setDaemon(True)
+
+        threadContinua = threading.Thread(target=self.cancela_prepara)
+        threadContinua.setDaemon(True)
+
+        threadEsperaPrepara.start()
+        threadContinua.start()
+
+        threadEsperaPrepara.join()
+
+    def espera_prepara(self):
         print("esperando prepara")
         #joga fora o primeiro comando da pilha
         r = requests.get(URL_POP)
 
         r = requests.get(URL_POP)
         while(r.text!= "preparar"):
+            if(self.cancelar_prepara):
+                break
             r = requests.get(URL_POP)
             time.sleep(1)
+
+    def cancela_prepara(self):
+        while(not self.cancelar_prepara):
+            entrada = input("tecle ENTER para continuar: \n")
+            if(entrada==""):
+                self.cancelar_prepara = True
+                break
 
 
     def push_status(command):
