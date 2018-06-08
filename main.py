@@ -64,20 +64,29 @@ class Main():
             mServidor.setExecutando(False)
             Servidor.push_status("Aguardando")
 
+            #verifica se todos os motores foram pausados
+            stop = True
+            for mc in mTeste.mcs:
+                if(mc.getStopMotion()==False):
+                    stop = False
+            if(stop==False): #ou seja, nem todos os motores foram pausados
+                if(mServidor.comando !="empty"): #ou seja, os drones executaram algum movimento
+                    Servidor.press_enter()
+
+
 
             #zera o pouso emergencial
             for mc in mTeste.mcs:
                 mc.setStopMotion(False)
 
-            while(inMaintenance):
-                maintenanceInput = input("tecle enter se estiver pronto")
-                if(maintenanceInput == ""):
-                    inMaintenance = False
-
-
-
             for sync in mTeste.scfs:
                 sync.close_link()
+            input("Movimento realizado. Tecle ENTER quando estiver disponível")
+
+
+
+
+
 
 if __name__ =='__main__':
     main = Main()

@@ -5,6 +5,7 @@ import trajetorias as tr
 import threading
 import paralelo
 
+
 from cflib.crazyflie import Crazyflie
 from cflib.crazyflie.syncCrazyflie import SyncCrazyflie
 from cflib.positioning.motion_commander import MotionCommander

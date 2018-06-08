@@ -1,6 +1,7 @@
 import requests
 import time
 import threading
+from pynput.keyboard import Key, Controller
 
 
 URL_POP = 'https://3vkeycenej.execute-api.us-east-1.amazonaws.com/prod/CIAB-2018-DroneCommandQueue?droneId=drone1&operation=POP&secret=dr0neRulez2A5T7U'
@@ -20,14 +21,14 @@ class Servidor():
         #r = request.get()
 
     def solicitar_conexao(self):
-        print("conectado")
+        print("aguardando comando...")
         #joga fora o primeiro comando que estiver na pilha
         r = requests.get(URL_POP)
 
         r = requests.get(URL_POP)
         while(r.text=='empty'):
             if(self.cancelarConexao==True):
-                break
+                return
 
             #Verifica se não houve perda de conexão
             for cf in self.mTeste.cfs:
@@ -39,14 +40,15 @@ class Servidor():
             time.sleep(1)
 
         self.comando = r.text
+        Servidor.press_enter()
 
     def cancela_comando(self):
-
+        entrada = input("tecle ENTER se quiser cancelar: ")
         while(not self.cancelarConexao):
-            entrada = input("digite \'cancela\' para cancelar: ")
-            if(entrada=='cancela'):
+            if(entrada==""):
                 self.cancelarConexao = True
-                break
+                return
+
 
     def verificar_comando(self, mTeste):
         self.mTeste = mTeste
@@ -61,6 +63,8 @@ class Servidor():
 
         threadComando.join()
 
+
+
     def verificar_prepara(self):
         threadEsperaPrepara = threading.Thread(target=self.espera_prepara)
         threadEsperaPrepara.setDaemon(True)
@@ -73,21 +77,27 @@ class Servidor():
 
         threadEsperaPrepara.join()
 
+
+
     def espera_prepara(self):
-        print("esperando prepara")
+        print("\n===============================================================================\n"
+              "Aguardando prepara...")
         #joga fora o primeiro comando da pilha
         r = requests.get(URL_POP)
 
         r = requests.get(URL_POP)
         while(r.text!= "preparar"):
             if(self.cancelar_prepara):
-                break
+                return
             r = requests.get(URL_POP)
             time.sleep(1)
+        Servidor.press_enter()
+
 
     def cancela_prepara(self):
         while(not self.cancelar_prepara):
-            entrada = input("tecle ENTER para continuar: \n")
+            entrada = input("tecle ENTER se quiser continuar: "
+                            "\n===============================================================================\n")
             if(entrada==""):
                 self.cancelar_prepara = True
                 break
@@ -95,3 +105,8 @@ class Servidor():
 
     def push_status(command):
         r = requests.get(URL_PUSH_STATUS + command)
+
+    def press_enter():
+        keyboard = Controller()
+        keyboard.press(Key.enter)
+        keyboard.release(Key.enter)

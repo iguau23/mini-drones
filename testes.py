@@ -35,21 +35,25 @@ class Teste():
     def pouso_emergencial(self):
         stop = False
         while(stop==False):
+            entrada = input("pouso emergencial - Drone (1), (2), (3) OU (4): ")
+            if(entrada == ""): # se vazio, sai
+                break
+
+            try:
+                entrada = int(entrada)
+            except:
+                entrada = 0
+            if(entrada  in self.selected):
+                n = self.selected.index(entrada)
+                if(n!=-1):
+                    self.mcs[n].setStopMotion(True)
+                    print("pouso emergencial %d acionado" %entrada)
+
             #verifica se todos os motores foram pausados
             stop = True
             for mc in self.mcs:
                 if(mc.getStopMotion()==False):
                     stop = False
-
-            entrada = input("pouso emergencial - Drone (1), (2), (3) OU (4): ")
-            if(entrada == ""): # se vazio, sai
-                break
-            if(entrada  in ['1','2','3','4']):
-                entrada = int(entrada)
-                n = self.selected.index(entrada)
-                if(n!=-1):
-                    self.mcs[n].setStopMotion(True)
-                    print("pouso emergencial %d acionado" %entrada)
 
     def setThreadEmergencial(self):
         #inicia a thread para o pouso emergencial
