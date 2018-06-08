@@ -15,6 +15,7 @@ class Servidor():
         self.comando = "empty"
         self.cancelarConexao = False
         self.executando = False
+        self.semConexao = True
 
     def setExecutando(self, value):
         self.executando = value;
@@ -35,6 +36,7 @@ class Servidor():
                 if (cf.link == None):
                     print("conexao com o drone perdida")
                     self.cancelarConexao = True
+                    self.semConexao = True
 
             r = requests.get(URL_POP)
             time.sleep(1)

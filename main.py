@@ -20,14 +20,18 @@ class Main():
             duration = 1  # second
             freq = 440  # Hz
             os.system('play --no-show-progress --null --channels 1 synth %s sine %f' % (duration, freq))
-            print("iniciando testes\n")
-            Servidor.push_status("Preparando drone...")
-            mTeste = Teste()
-            mTeste.start()
 
-            Servidor.push_status("Pronto! Aguardando comando")
+            while(mServidor.semConexao): #verifica se ha algum drone que perdeu conexao
+                print("iniciando testes\n")
+                Servidor.push_status("Preparando drone...")
+                mTeste = Teste()
+                mTeste.start()
+                mServidor = Servidor()
+                mServidor.semConexao = False #conectou com Drone
 
-            mServidor.verificar_comando(mTeste)
+                Servidor.push_status("Pronto! Aguardando comando")
+                mServidor.verificar_comando(mTeste)
+
 
             mServidor.setExecutando(True)
 
@@ -61,8 +65,7 @@ class Main():
                 else:
                     print("numero insuficiente")
 
-            mServidor.setExecutando(False)
-            Servidor.push_status("Aguardando")
+
 
             #verifica se todos os motores foram pausados
             stop = True
@@ -74,6 +77,8 @@ class Main():
                     Servidor.press_enter()
 
 
+            mServidor.setExecutando(False)
+            Servidor.push_status("Aguardando")
 
             #zera o pouso emergencial
             for mc in mTeste.mcs:

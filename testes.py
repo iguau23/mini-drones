@@ -135,13 +135,17 @@ class Teste():
             if(len(self.selected)==0):
                 print("comando invalido")
 
-            for i in self.selected:
-                cf = Crazyflie(rw_cache='./cache')
-                self.cfs.append(cf)
-                sync = SyncCrazyflie(self.uris[i-1], cf=cf)
-                sync.open_link()
-                self.mcs.append(MotionCommander(sync))
-                self.scfs.append(sync)
+            try:
+                for i in self.selected:
+                    cf = Crazyflie(rw_cache='./cache')
+                    self.cfs.append(cf)
+                    sync = SyncCrazyflie(self.uris[i-1], cf=cf)
+                    sync.open_link()
+                    self.mcs.append(MotionCommander(sync))
+                    self.scfs.append(sync)
+            except:
+                print("Exception: Too many packets lost\n")
+                self.selected = []
 
 
     def start(self):
