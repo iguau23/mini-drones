@@ -58,7 +58,6 @@ class Main():
             if (mServidor.comando=="esquadrilha"):
                 Servidor.push_status("Executando Esquadrilha")
                 print("esquadrilha")
-                mTeste.setThreadEmergencial()
                 if (len(mTeste.mcs)==2):
                     mTeste.setThreadEmergencial()
                     combinacao.esquadrilha(mTeste.mcs[0], mTeste.mcs[1])
@@ -75,6 +74,11 @@ class Main():
             if(stop==False): #ou seja, nem todos os motores foram pausados
                 if(mServidor.comando !="empty"): #ou seja, os drones executaram algum movimento
                     Servidor.press_enter()
+
+            mTeste.testeBateria(mTeste.cfs[0])
+
+            if(len(mTeste.cfs)==2):
+                mTeste.testeBateria(mTeste.cfs[1])
 
 
             mServidor.setExecutando(False)
