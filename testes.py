@@ -106,6 +106,7 @@ class Teste():
             print('Could not add Stabilizer log config, bad configuration.')
         time.sleep(0.3)
         lg_stab.stop()
+        time.sleep(0.3)
 
     def stab_log_data(self, timestamp, data, logconf):
         """Callback froma the log API when data arrives"""
@@ -200,9 +201,16 @@ class Teste():
                     self.testeBateria(self.cfs[0])
                 time.sleep(0.5)
             elif(selectedTest == TESTSUBIDA):
+
                 if(len(self.selected)==1):
+                    self.testeBateria(self.cfs[0])
                     self.testeSubida(self.mcs[0])
                 else:
+                    print("bateria drone ", self.selected[0])
+                    self.testeBateria(self.cfs[0])
+
+                    print("bateria drone ", self.selected[1])
+                    self.testeBateria(self.cfs[1])
                     self.testeSubida2(self.mcs[0], self.mcs[1])
             elif(selectedTest == SELECT):
                 for sync in self.scfs:
