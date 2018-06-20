@@ -75,6 +75,11 @@ class Main():
                 if(mServidor.comando !="empty"): #ou seja, os drones executaram algum movimento
                     Servidor.press_enter()
 
+            mTeste.testeBateria(mTeste.cfs[0])
+
+            if(len(mTeste.cfs)==2):
+                mTeste.testeBateria(mTeste.cfs[1])
+
 
             mServidor.setExecutando(False)
             Servidor.push_status("Aguardando")
