@@ -58,7 +58,6 @@ class Main():
             if (mServidor.comando=="esquadrilha"):
                 Servidor.push_status("Executando Esquadrilha")
                 print("esquadrilha")
-                mTeste.setThreadEmergencial()
                 if (len(mTeste.mcs)==2):
                     mTeste.setThreadEmergencial()
                     combinacao.esquadrilha(mTeste.mcs[0], mTeste.mcs[1])
