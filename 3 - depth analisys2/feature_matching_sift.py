@@ -63,11 +63,11 @@ def find_marker(image, template):
         img3 = cv2.drawMatches(img1,kp1,img2,kp2,good,None,**draw_params)
 
 
-        print(dst[0][0][0], dst[0][0][1])
-        print(dst[1][0][0], dst[1][0][1])
-        print(dst[2][0][0], dst[2][0][1])
-        print(dst[3][0][0], dst[3][0][1])
-        plt.imshow(img2, 'gray'),plt.show()
+        #print(dst[0][0][0], dst[0][0][1])
+        #print(dst[1][0][0], dst[1][0][1])
+        #print(dst[2][0][0], dst[2][0][1])
+        #print(dst[3][0][0], dst[3][0][1])
+        #plt.imshow(img2, 'gray'),plt.show()
         return dst, img2
 
     else:

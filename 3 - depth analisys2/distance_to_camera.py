@@ -59,7 +59,7 @@ class DistanceCalculator():
 if __name__ == '__main__':
     calculator = DistanceCalculator()
 
-    img = cv2.imread('data/30g-10-40.jpg')
+    img = cv2.imread('data/30g-10-30.jpg')
     distance_x, distance_y = calculator.calculateDistance(img)
     DistanceCalculator.writeDistance(img, distance_x, distance_y)
     plt.imshow(img, 'gray'), plt.show()
