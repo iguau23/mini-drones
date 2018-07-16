@@ -34,7 +34,7 @@ if __name__ == '__main__':
     args.setdefault('--square_size', 1.0)
     args.setdefault('--threads', 4)
     if not img_mask:
-        img_mask = './data/foto??.jpg'  # default
+        img_mask = './data_cel_out/foto??.jpg'  # default
     else:
         img_mask = img_mask[0]
 
